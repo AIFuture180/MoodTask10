@@ -166,11 +166,32 @@
             max-width: 600px;
             margin: 20px auto;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+        .ad-placeholder:hover {
+            transform: scale(1.02);
+            border: 2px solid #4A90E2;
         }
         .ad-placeholder img {
-            max-width: 100%;
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
             border-radius: 10px;
             border: none;
+        }
+        .ad-placeholder::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.3));
+            pointer-events: none;
         }
         .footer {
             background-color: #333;
@@ -246,6 +267,9 @@
             .mood-grid {
                 grid-template-columns: 1fr;
             }
+            .ad-placeholder img {
+                height: 80px;
+            }
         }
     </style>
 </head>
@@ -278,21 +302,21 @@
     <div class="hero">
         <h1>Transform Your Mood</h1>
         <p>Discover science-backed activities tailored to how you feel right now.</p>
-        <button class="mood-button" onclick="toggleMoodDropdown()">How are you feeling?</button>
+        <button class="mood-button" id="moodButton">How are you feeling?</button>
     </div>
     <div class="mood-dropdown" id="moodDropdown">
         <h3>Select Your Mood</h3>
         <div class="mood-grid">
-            <div class="mood-option" onclick="showRecommendation('Happy')">Happy</div>
-            <div class="mood-option" onclick="showRecommendation('Sad')">Sad</div>
-            <div class="mood-option" onclick="showRecommendation('Angry')">Angry</div>
-            <div class="mood-option" onclick="showRecommendation('Anxious')">Anxious</div>
-            <div class="mood-option" onclick="showRecommendation('Stressed')">Stressed</div>
-            <div class="mood-option" onclick="showRecommendation('Tired')">Tired</div>
-            <div class="mood-option" onclick="showRecommendation('Excited')">Excited</div>
-            <div class="mood-option" onclick="showRecommendation('Bored')">Bored</div>
-            <div class="mood-option" onclick="showRecommendation('Frustrated')">Frustrated</div>
-            <div class="mood-option" onclick="showRecommendation('Relaxed')">Relaxed</div>
+            <div class="mood-option" data-mood="Happy">Happy</div>
+            <div class="mood-option" data-mood="Sad">Sad</div>
+            <div class="mood-option" data-mood="Angry">Angry</div>
+            <div class="mood-option" data-mood="Anxious">Anxious</div>
+            <div class="mood-option" data-mood="Stressed">Stressed</div>
+            <div class="mood-option" data-mood="Tired">Tired</div>
+            <div class="mood-option" data-mood="Excited">Excited</div>
+            <div class="mood-option" data-mood="Bored">Bored</div>
+            <div class="mood-option" data-mood="Frustrated">Frustrated</div>
+            <div class="mood-option" data-mood="Relaxed">Relaxed</div>
         </div>
     </div>
     <div class="recommendation" id="HappyRecommendation">
@@ -477,7 +501,7 @@
     </div>
     <div class="ad-placeholder" id="adBanner">
         <a id="adLink" href="https://amzn.to/4i6jcXK">
-            <img id="adImage" src="https://via.placeholder.com/600x100?text=Weighted+Heated+Lap+Pad+Ad" alt="Weighted Heated Lap Pad Ad">
+            <img id="adImage" src="https://via.placeholder.com/600x100?text=Weighted+Heated+Lap+Pad" alt="Weighted Heated Lap Pad">
         </a>
     </div>
     <div class="footer">
@@ -507,7 +531,12 @@
         // Mood Dropdown and Recommendation Logic
         function toggleMoodDropdown() {
             const dropdown = document.getElementById('moodDropdown');
-            dropdown.classList.toggle('active');
+            if (dropdown) {
+                dropdown.classList.toggle('active');
+                console.log('Mood dropdown toggled:', dropdown.classList.contains('active') ? 'visible' : 'hidden');
+            } else {
+                console.error('Mood dropdown element not found');
+            }
         }
 
         function showRecommendation(mood) {
@@ -517,53 +546,64 @@
             const recommendation = document.getElementById(mood + 'Recommendation');
             if (recommendation) {
                 recommendation.classList.add('active');
+                console.log('Showing recommendation for:', mood);
+            } else {
+                console.error('Recommendation element not found for mood:', mood);
             }
-            document.getElementById('moodDropdown').classList.remove('active');
-            console.log('Selected mood:', mood);
+            const dropdown = document.getElementById('moodDropdown');
+            if (dropdown) {
+                dropdown.classList.remove('active');
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const moodButton = document.querySelector('.mood-button');
+            const moodButton = document.getElementById('moodButton');
             if (moodButton) {
                 moodButton.addEventListener('click', toggleMoodDropdown);
+                console.log('Mood button event listener attached');
             } else {
                 console.error('Mood button not found');
             }
             const moodOptions = document.querySelectorAll('.mood-option');
-            moodOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    const mood = option.textContent;
-                    showRecommendation(mood);
+            if (moodOptions.length > 0) {
+                moodOptions.forEach(option => {
+                    option.addEventListener('click', () => {
+                        const mood = option.dataset.mood;
+                        showRecommendation(mood);
+                    });
                 });
-            });
+                console.log('Mood option event listeners attached:', moodOptions.length);
+            } else {
+                console.error('No mood options found');
+            }
         });
 
-        // Rotating Affiliate Ad Banner
+        // Rotating Affiliate Banner
         const ads = [
             {
                 link: 'https://amzn.to/4i6jcXK',
-                image: 'https://via.placeholder.com/600x100?text=Weighted+Heated+Lap+Pad+Ad',
-                alt: 'Weighted Heated Lap Pad Ad'
+                image: 'https://via.placeholder.com/600x100?text=Weighted+Heated+Lap+Pad',
+                alt: 'Weighted Heated Lap Pad'
             },
             {
                 link: 'https://amzn.to/4jo3R5Y',
-                image: 'https://via.placeholder.com/600x100?text=Bearaby+Weighted+Blanket+Ad',
-                alt: 'Bearaby Cotton Hand-Knit Weighted Blanket Ad'
+                image: 'https://via.placeholder.com/600x100?text=Bearaby+Cotton+Hand-Knit+Weighted+Blanket',
+                alt: 'Bearaby Cotton Hand-Knit Weighted Blanket'
             },
             {
                 link: 'https://amzn.to/4ir7OWZ',
-                image: 'https://via.placeholder.com/600x100?text=Serenilite+Stress+Balls+Ad',
-                alt: 'Serenilite Stress Balls Ad'
+                image: 'https://via.placeholder.com/600x100?text=Serenilite+Stress+Balls',
+                alt: 'Serenilite Stress Balls'
             },
             {
                 link: 'https://amzn.to/4jbEB3h',
-                image: 'https://via.placeholder.com/600x100?text=AG1+Supplement+Ad',
-                alt: 'AG1 Supplement Ad'
+                image: 'https://via.placeholder.com/600x100?text=AG1+Supplement',
+                alt: 'AG1 Supplement'
             },
             {
                 link: 'https://amzn.to/42jEfjN',
-                image: 'https://via.placeholder.com/600x100?text=Echo+Go+Hydrogen+Water+Bottle+Ad',
-                alt: 'Echo Go+ Hydrogen Water Bottle Ad'
+                image: 'https://via.placeholder.com/600x100?text=Echo+Go+Hydrogen+Water+Bottle',
+                alt: 'Echo Go+ Hydrogen Water Bottle'
             }
         ];
 
@@ -572,18 +612,23 @@
         function rotateAd() {
             const adLink = document.getElementById('adLink');
             const adImage = document.getElementById('adImage');
-            const currentAd = ads[currentAdIndex];
-            adLink.href = currentAd.link;
-            adImage.src = currentAd.image;
-            adImage.alt = currentAd.alt;
-            currentAdIndex = (currentAdIndex + 1) % ads.length;
+            if (adLink && adImage) {
+                const currentAd = ads[currentAdIndex];
+                adLink.href = currentAd.link;
+                adImage.src = currentAd.image;
+                adImage.alt = currentAd.alt;
+                currentAdIndex = (currentAdIndex + 1) % ads.length;
+                console.log('Rotated ad to:', currentAd.alt);
+            } else {
+                console.error('Ad elements not found');
+            }
         }
 
         // Initial ad display
         rotateAd();
 
-        // Rotate every 6 seconds
-        setInterval(rotateAd, 6000);
+        // Rotate every 8 seconds
+        setInterval(rotateAd, 8000);
     </script>
 </body>
 </html>
