@@ -3,112 +3,632 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodTask - Boost Your Mood</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>MoodTask - Transform Your Mood</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .nav-bar {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-bar .logo {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #4A90E2;
+        }
+        .nav-bar a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #4A90E2;
+            font-weight: 500;
+        }
+        .nav-bar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .nav-bar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .nav-bar .dropdown-content a {
+            color: #4A90E2;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+        }
+        .nav-bar .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+        .nav-bar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .hero {
+            background: linear-gradient(135deg, #2C3E50, #4A90E2);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .mood-input {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .mood-input select {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            color: #333;
+        }
+        .mood-input button {
+            padding: 10px 20px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .mood-input button:hover {
+            background-color: #3a7bc8;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .recommendations {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .recommendation {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        .popup.active {
+            display: block;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .breathing-circle {
+            width: 100px;
+            height: 100px;
+            background-color: #4A90E2;
+            border-radius: 50%;
+            margin: 20px auto;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .footer a {
+            color: #D6D1F5;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer .affiliate-note {
+            font-size: 0.8em;
+            color: #aaa;
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .footer .connect button {
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .footer .connect .coffee {
+            background-color: #FFC107;
+            color: #333;
+        }
+        .footer .connect .therapy {
+            background-color: #4A90E2;
+            color: white;
+        }
+        .footer .connect .mindfulness {
+            background-color: #6BCB77;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>MoodTask</h1>
-        <nav>
-            <ul>
-                <li><a href="#home" class="tab-link active" data-tab="home">Home</a></li>
-                <li><a href="#mood-music" class="tab-link" data-tab="mood-music">Mood Music</a></li>
-                <li><a href="#activities" class="tab-link" data-tab="activities">Activities</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="home" class="tab-content active">
-            <h2>How Are You Feeling?</h2>
-            <select id="mood-selector">
-                <option value="">Select a Mood</option>
-                <option value="happy">Happy</option>
-                <option value="sad">Sad</option>
-                <option value="angry">Angry</option>
-                <option value="calm">Calm</option>
-                <option value="stressed">Stressed</option>
-                <option value="excited">Excited</option>
-                <option value="bored">Bored</option>
-                <option value="lonely">Lonely</option>
-                <option value="grateful">Grateful</option>
-                <option value="frustrated">Frustrated</option>
+    <div class="nav-bar">
+        <div class="logo">MoodTask</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="calendar.html">Dashboard</a>
+            <div class="dropdown">
+                <a href="activities.html">Activities</a>
+                <div class="dropdown-content">
+                    <a href="activities.html#breathing">Breathing</a>
+                    <a href="activities.html#soundscape">Soundscape</a>
+                    <a href="activities.html#punching">Punching Bag</a>
+                    <a href="activities.html#stretch">Stretch</a>
+                    <a href="activities.html#doodle">Doodle</a>
+                    <a href="activities.html#dance">Dance</a>
+                    <a href="activities.html#color-focus">Color Focus</a>
+                    <a href="activities.html#worry">Worry</a>
+                    <a href="activities.html#gratitude">Gratitude</a>
+                </div>
+            </div>
+            <a href="music.html">Mood Music</a>
+            <a href="blog.html">Blog</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+        </div>
+    </div>
+    <div class="hero">
+        <h1>Transform Your Mood</h1>
+        <p>Enter your current mood below, and we’ll suggest science-backed activities to help you feel better.</p>
+        <div class="mood-input">
+            <select id="moodSelect" onchange="submitMood()">
+                <option value="">How are you feeling?</option>
+                <option value="Tired">Tired</option>
+                <option value="Stressed">Stressed</option>
+                <option value="Sad">Sad</option>
+                <option value="Angry">Angry</option>
+                <option value="Happy">Happy</option>
+                <option value="Anxious">Anxious</option>
+                <option value="Overwhelmed">Overwhelmed</option>
+                <option value="Lonely">Lonely</option>
+                <option value="Frustrated">Frustrated</option>
+                <option value="Bored">Bored</option>
+                <option value="Irritable">Irritable</option>
+                <option value="Hopeless">Hopeless</option>
+                <option value="Nervous">Nervous</option>
+                <option value="Unmotivated">Unmotivated</option>
+                <option value="Confused">Confused</option>
             </select>
-            <div id="mood-content">
-                <p>Select a mood to get personalized suggestions.</p>
-            </div>
-            <!-- Online Therapy and Mindfulness -->
-            <div class="info-section">
-                <h3>Online Therapy</h3>
-                <p>Explore professional support with <a href="https://www.betterhelp.com" target="_blank">BetterHelp</a> for personalized therapy sessions.</p>
-                <h3>Mindfulness</h3>
-                <p>Practice mindfulness with <a href="https://www.headspace.com" target="_blank">Headspace</a> for guided meditations and stress relief.</p>
-            </div>
-        </section>
+            <button onclick="submitMood()">Submit</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="recommendations" id="recommendations">
+            <h3 id="recTitle"></h3>
+            <div id="recList"></div>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="breathingPopup">
+        <h3>Breathing Exercise</h3>
+        <p>Breathe in deeply...</p>
+        <div class="breathing-circle" id="breathingCircle"></div>
+        <p>Time remaining: <span id="breathingTimer">60</span>s</p>
+        <p id="breathingAffirmation" style="display: none;">Great job!</p>
+        <button onclick="closePopup('breathingPopup')">Close</button>
+    </div>
+    <div class="popup" id="soundscapePopup">
+        <h3>Ocean Soundscape</h3>
+        <p>Listen to calming ocean waves...</p>
+        <p>Time remaining: <span id="soundscapeTimer">60</span>s</p>
+        <p id="soundscapeAffirmation" style="display: none;">Great job!</p>
+        <button onclick="closePopup('soundscapePopup')">Close</button>
+    </div>
+    <div class="popup" id="punchingPopup">
+        <h3>Punching Bag</h3>
+        <p>Click to punch: <span id="punchCount">0</span></p>
+        <p>Time remaining: <span id="punchingTimer">30</span>s</p>
+        <p id="punchingAffirmation" style="display: none;">Great job!</p>
+        <button onclick="closePopup('punchingPopup')">Close</button>
+    </div>
+    <div class="popup" id="stretchPopup">
+        <h3>Stretch</h3>
+        <p>Follow this stretch routine...</p>
+        <p>Time remaining: <span id="stretchTimer">60</span>s</p>
+        <p id="stretchAffirmation" style="display: none;">Great job!</p>
+        <button onclick="closePopup('stretchPopup')">Close</button>
+    </div>
+    <div class="popup" id="doodlePopup">
+        <h3>Doodle</h3>
+        <canvas id="doodleCanvas" width="300" height="200" style="border: 1px solid #ccc;"></canvas>
+        <p>Time remaining: <span id="doodleTimer">90</span>s</p>
+        <p id="doodleAffirmation" style="display: none;">Great job!</p>
+        <button onclick="closePopup('doodlePopup')">Close</button>
+    </div>
+    <div class="popup" id="dancePopup">
+        <h3>Dance Prompt</h3>
+        <p>Do a little twirl!</p>
+        <p>Time remaining: <span id="danceTimer">30</span>s</p>
+        <p id="danceAffirmation" style="display: none;">Great job!</p>
+        <button onclick="closePopup('dancePopup')">Close</button>
+    </div>
+    <div class="popup" id="colorFocusPopup">
+        <h3>Color Focus</h3>
+        <div style="width: 100px; height: 100px; background-color: blue; margin: 20px auto;"></div>
+        <p>Focus on this color...</p>
+        <p>Time remaining: <span id="colorFocusTimer">60</span>s</p>
+        <p id="colorFocusAffirmation" style="display: none;">Great job!</p>
+        <button onclick="closePopup('colorFocusPopup')">Close</button>
+    </div>
+    <div class="popup" id="worryPopup">
+        <h3>Worry Shredder</h3>
+        <textarea id="worryText" placeholder="Write your worry here..."></textarea>
+        <button onclick="shredWorry()">Shred It</button>
+        <p id="worryAffirmation" style="display: none;">Great job letting go!</p>
+        <button onclick="closePopup('worryPopup')">Close</button>
+    </div>
+    <div class="popup" id="gratitudePopup">
+        <h3>Gratitude Practice</h3>
+        <textarea id="gratitudeText" placeholder="What are you grateful for?"></textarea>
+        <button onclick="saveGratitude()">Save</button>
+        <p id="gratitudeAffirmation" style="display: none;">Great job reflecting!</p>
+        <button onclick="closePopup('gratitudePopup')">Close</button>
+    </div>
+    <div class="footer">
+        <div>
+            <h3>MoodTask</h3>
+            <p>Transform your mood with science-backed activities designed to improve your emotional well-being.</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <a href="index.html">Home</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+        </div>
+        <div class="connect">
+            <h3>Connect</h3>
+            <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
+            <button class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</button>
+            <button class="therapy">Online Therapy</button>
+            <button class="mindfulness">Mindfulness</button>
+        </div>
+        <div class="affiliate-note">
+            AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
+            © 2025 MoodTask. All rights reserved.
+        </div>
+    </div>
+    <script>
+        const moodTasks = {
+            Tired: [
+                { name: "Physiological Sigh", description: "Dr. Andrew Huberman recommends this to reduce fatigue by resetting the nervous system.", tool: "breathingPopup" },
+                { name: "Gratitude Note", description: "Dr. Robert Emmons suggests gratitude practices to boost energy through positivity.", tool: "gratitudePopup" },
+                { name: "Mindful Nap Prompt", description: "Dr. Matthew Walker advises short naps to restore energy without disrupting sleep cycles.", tool: "stretchPopup" }
+            ],
+            Stressed: [
+                { name: "Physiological Sigh", description: "Dr. Andrew Huberman notes this calms the amygdala, reducing stress.", tool: "breathingPopup" },
+                { name: "Ocean Soundscape", description: "Dr. Mark Hyman recommends nature sounds to lower cortisol levels.", tool: "soundscapePopup" },
+                { name: "Gratitude Practice", description: "Dr. Martin Seligman suggests shifting focus to reduce stress through positivity.", tool: "gratitudePopup" }
+            ],
+            Sad: [
+                { name: "Self-Compassion Practice", description: "Dr. Kristin Neff recommends self-compassion to ease emotional pain.", tool: "gratitudePopup" },
+                { name: "Reframe Through Movement", description: "Dr. Bessel van der Kolk suggests movement to release emotional tension.", tool: "dancePopup" },
+                { name: "Gratitude for Dopamine Boost", description: "Dr. Loretta Breuning advises creative expression to boost dopamine.", tool: "doodlePopup" }
+            ],
+            Angry: [
+                { name: "Punching Bag", description: "Dr. John Ratey recommends physical activity to release pent-up anger safely.", tool: "punchingPopup" },
+                { name: "Worry Shredder", description: "Dr. Edmund Bourne suggests writing and discarding worries to process anger.", tool: "worryPopup" },
+                { name: "Breathing Exercise", description: "Dr. Herbert Benson advises deep breathing to calm the fight-or-flight response.", tool: "breathingPopup" }
+            ],
+            Happy: [
+                { name: "Dance Prompt", description: "Dr. Tal Ben-Shahar suggests movement to amplify positive emotions.", tool: "dancePopup" },
+                { name: "Gratitude Note", description: "Dr. Sonja Lyubomirsky recommends savoring happiness through reflection.", tool: "gratitudePopup" },
+                { name: "Creative Expression", description: "Dr. Mihaly Csikszentmihalyi advises creative activities to enhance flow states.", tool: "doodlePopup" }
+            ],
+            Anxious: [
+                { name: "Worry Shredder", description: "Dr. David Burns recommends externalizing worries to reduce anxiety.", tool: "worryPopup" },
+                { name: "Breathing Exercise", description: "Dr. Richard Brown suggests rhythmic breathing to calm the nervous system.", tool: "breathingPopup" },
+                { name: "Color Focus", description: "Dr. Stephen Porges advises visual focus exercises to ground the mind.", tool: "colorFocusPopup" }
+            ],
+            Overwhelmed: [
+                { name: "Physiological Sigh", description: "Dr. Andrew Huberman recommends this to reset the nervous system.", tool: "breathingPopup" },
+                { name: "Reframe Through Movement", description: "Dr. Kelly McGonigal suggests movement to manage overwhelm.", tool: "stretchPopup" },
+                { name: "Ocean Soundscape", description: "Dr. Mark Hyman advises calming sounds to reduce sensory overload.", tool: "soundscapePopup" }
+            ],
+            Lonely: [
+                { name: "Gratitude Note", description: "Dr. John Cacioppo suggests gratitude to foster a sense of connection.", tool: "gratitudePopup" },
+                { name: "Creative Expression", description: "Dr. Lisa Feldman Barrett recommends creative outlets to process emotions.", tool: "doodlePopup" },
+                { name: "Dance Prompt", description: "Dr. Peter Lovatt advises movement to boost social feelings through endorphins.", tool: "dancePopup" }
+            ],
+            Frustrated: [
+                { name: "Punching Bag", description: "Dr. John Ratey suggests physical release to manage frustration.", tool: "punchingPopup" },
+                { name: "Worry Shredder", description: "Dr. Albert Ellis recommends reframing thoughts to reduce frustration.", tool: "worryPopup" },
+                { name: "Breathing Exercise", description: "Dr. Jon Kabat-Zinn advises mindfulness to calm the mind.", tool: "breathingPopup" }
+            ],
+            Bored: [
+                { name: "Creative Expression", description: "Dr. Teresa Amabile suggests creativity to combat boredom.", tool: "doodlePopup" },
+                { name: "Dance Prompt", description: "Dr. Stuart Brown recommends playful movement to stimulate engagement.", tool: "dancePopup" },
+                { name: "Color Focus", description: "Dr. Edward Hallowell advises visual tasks to spark interest.", tool: "colorFocusPopup" }
+            ],
+            Irritable: [
+                { name: "Breathing Exercise", description: "Dr. Daniel Siegel suggests mindfulness to reduce irritability.", tool: "breathingPopup" },
+                { name: "Ocean Soundscape", description: "Dr. Mark Hyman recommends nature sounds to soothe the nervous system.", tool: "soundscapePopup" },
+                { name: "Punching Bag", description: "Dr. John Ratey advises physical activity to release tension.", tool: "punchingPopup" }
+            ],
+            Hopeless: [
+                { name: "Gratitude Note", description: "Dr. Martin Seligman recommends gratitude to foster hope.", tool: "gratitudePopup" },
+                { name: "Reframe Through Movement", description: "Dr. Bessel van der Kolk suggests movement to shift emotional states.", tool: "dancePopup" },
+                { name: "Self-Compassion Practice", description: "Dr. Kristin Neff advises self-kindness to rebuild hope.", tool: "gratitudePopup" }
+            ],
+            Nervous: [
+                { name: "Breathing Exercise", description: "Dr. Richard Brown recommends slow breathing to calm nerves.", tool: "breathingPopup" },
+                { name: "Worry Shredder", description: "Dr. David Burns suggests externalizing fears to reduce nervousness.", tool: "worryPopup" },
+                { name: "Color Focus", description: "Dr. Stephen Porges advises grounding exercises to stabilize emotions.", tool: "colorFocusPopup" }
+            ],
+            Unmotivated: [
+                { name: "Dance Prompt", description: "Dr. John Ratey suggests movement to boost motivation through endorphins.", tool: "dancePopup" },
+                { name: "Creative Expression", description: "Dr. Teresa Amabile recommends creativity to spark inspiration.", tool: "doodlePopup" },
+                { name: "Gratitude Note", description: "Dr. Robert Emmons advises gratitude to shift focus to positive drivers.", tool: "gratitudePopup" }
+            ],
+            Confused: [
+                { name: "Color Focus", description: "Dr. Edward Hallowell suggests visual exercises to improve clarity.", tool: "colorFocusPopup" },
+                { name: "Breathing Exercise", description: "Dr. Jon Kabat-Zinn recommends mindfulness to center the mind.", tool: "breathingPopup" },
+                { name: "Ocean Soundscape", description: "Dr. Mark Hyman advises calming sounds to reduce mental fog.", tool: "soundscapePopup" }
+            ]
+        };
 
-        <section id="mood-music" class="tab-content">
-            <h2>Mood Music</h2>
-            <div class="music-grid">
-                <div class="music-card">
-                    <h3>Happy</h3>
-                    <p><a href="https://www.youtube.com/watch?v=ZbZSe6N_BXs" target="_blank">Pharrell Williams - Happy</a></p>
-                </div>
-                <div class="music-card">
-                    <h3>Sad</h3>
-                    <p><a href="https://www.youtube.com/watch?v=By7ctT7VC4M" target="_blank">Adele - Someone Like You</a></p>
-                </div>
-                <div class="music-card">
-                    <h3>Angry</h3>
-                    <p><a href="https://www.youtube.com/watch?v=fJ9rUzIMcZQ" target="_blank">Rage Against the Machine - Killing in the Name</a></p>
-                </div>
-                <div class="music-card">
-                    <h3>Calm</h3>
-                    <p><a href="https://www.youtube.com/watch?v=2OEL4P1Rz04" target="_blank">Ludovico Einaudi - Nuvole Bianche</a></p>
-                </div>
-                <!-- Add more music for other moods -->
-            </div>
-        </section>
+        function submitMood() {
+            const moodSelect = document.getElementById('moodSelect');
+            const mood = moodSelect.value;
+            if (mood) {
+                saveMood(mood);
+                showRecommendations(mood);
+            } else {
+                alert("Please select a mood.");
+            }
+        }
 
-        <section id="activities" class="tab-content">
-            <h2>Activities</h2>
-            <div class="activity-grid">
-                <div class="activity-card">
-                    <h3>Happy</h3>
-                    <p>Go for a walk in nature or call a friend to share your joy.</p>
-                </div>
-                <div class="activity-card">
-                    <h3>Sad</h3>
-                    <p>Write in a journal or watch a comforting movie.</p>
-                </div>
-                <div class="activity-card">
-                    <h3>Angry</h3>
-                    <p>Try a quick workout or practice deep breathing.</p>
-                </div>
-                <div class="activity-card">
-                    <h3>Calm</h3>
-                    <p>Meditate for 10 minutes or read a book.</p>
-                </div>
-                <!-- Add more activities from MoodTask9 -->
-            </div>
-        </section>
-    </main>
+        function saveMood(mood) {
+            const today = new Date().toISOString().split('T')[0];
+            const moodData = JSON.parse(localStorage.getItem('moodData')) || {};
+            moodData[today] = { mood, timestamp: new Date().toISOString() };
+            localStorage.setItem('moodData', JSON.stringify(moodData));
+        }
 
-    <aside class="sidebar">
-        <h3>Support Us</h3>
-        <p><a href="https://www.buymeacoffee.com/moodtask" target="_blank">Buy Me a Coffee</a></p>
-        <h3>Amazon Picks</h3>
-        <p><a href="https://www.amazon.com/dp/B08J5Z3K7V?tag=moodtask-20" target="_blank">Aromatherapy Diffuser</a></p>
-        <p><a href="https://www.amazon.com/dp/B07P5R6ZSF?tag=moodtask-20" target="_blank">Self-Care Journal</a></p>
-        <h3>Ads</h3>
-        <p><a href="https://www.example.com/ad1" target="_blank">Ad Example 1</a></p>
-        <p><a href="https://www.example.com/ad2" target="_blank">Ad Example 2</a></p>
-    </aside>
+        function showRecommendations(mood) {
+            const recTitle = document.getElementById('recTitle');
+            const recList = document.getElementById('recList');
+            const recommendationsDiv = document.getElementById('recommendations');
 
-    <footer>
-        <p>&copy; 2025 MoodTask. All rights reserved.</p>
-        <p><a href="https://www.buymeacoffee.com/moodtask" target="_blank">Support us on Buy Me a Coffee</a></p>
-    </footer>
+            recTitle.textContent = `Recommendations for ${mood} Mood:`;
+            recList.innerHTML = `<p style="font-style: italic;">You entered ${mood.toLowerCase()}</p>`;
+            moodTasks[mood].forEach(task => {
+                const div = document.createElement('div');
+                div.className = 'recommendation';
+                div.innerHTML = `
+                    <i class="fas fa-heart"></i>
+                    <div>
+                        <strong>${task.name}</strong>
+                        <p>${task.description}</p>
+                    </div>
+                    <button onclick="openPopup('${task.tool}')">Try Now</button>
+                `;
+                recList.appendChild(div);
+            });
+            recommendationsDiv.style.display = 'block';
+        }
 
-    <script src="script.js"></script>
+        function openPopup(popupId) {
+            document.getElementById(popupId).classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+            if (popupId === 'breathingPopup') startBreathing();
+            if (popupId === 'soundscapePopup') startSoundscape();
+            if (popupId === 'punchingPopup') startPunching();
+            if (popupId === 'stretchPopup') startStretch();
+            if (popupId === 'doodlePopup') startDoodle();
+            if (popupId === 'dancePopup') startDance();
+            if (popupId === 'colorFocusPopup') startColorFocus();
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        function startBreathing() {
+            let time = 60;
+            const circle = document.getElementById('breathingCircle');
+            const timerDisplay = document.getElementById('breathingTimer');
+            const affirmation = document.getElementById('breathingAffirmation');
+            const interval = setInterval(() => {
+                time--;
+                timerDisplay.textContent = time;
+                circle.style.transform = time % 10 < 5 ? 'scale(1.2)' : 'scale(1)';
+                if (time <= 0) {
+                    clearInterval(interval);
+                    affirmation.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function startSoundscape() {
+            let time = 60;
+            const timerDisplay = document.getElementById('soundscapeTimer');
+            const affirmation = document.getElementById('soundscapeAffirmation');
+            const interval = setInterval(() => {
+                time--;
+                timerDisplay.textContent = time;
+                if (time <= 0) {
+                    clearInterval(interval);
+                    affirmation.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function startPunching() {
+            let time = 30;
+            let count = 0;
+            const timerDisplay = document.getElementById('punchingTimer');
+            const punchCount = document.getElementById('punchCount');
+            const affirmation = document.getElementById('punchingAffirmation');
+            const interval = setInterval(() => {
+                time--;
+                timerDisplay.textContent = time;
+                if (time <= 0) {
+                    clearInterval(interval);
+                    affirmation.style.display = 'block';
+                }
+            }, 1000);
+            punchCount.parentElement.addEventListener('click', () => {
+                if (time > 0) {
+                    count++;
+                    punchCount.textContent = count;
+                }
+            });
+        }
+
+        function startStretch() {
+            let time = 60;
+            const timerDisplay = document.getElementById('stretchTimer');
+            const affirmation = document.getElementById('stretchAffirmation');
+            const interval = setInterval(() => {
+                time--;
+                timerDisplay.textContent = time;
+                if (time <= 0) {
+                    clearInterval(interval);
+                    affirmation.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function startDoodle() {
+            let time = 90;
+            const canvas = document.getElementById('doodleCanvas');
+            const ctx = canvas.getContext('2d');
+            let drawing = false;
+            const timerDisplay = document.getElementById('doodleTimer');
+            const affirmation = document.getElementById('doodleAffirmation');
+            const interval = setInterval(() => {
+                time--;
+                timerDisplay.textContent = time;
+                if (time <= 0) {
+                    clearInterval(interval);
+                    affirmation.style.display = 'block';
+                }
+            }, 1000);
+            canvas.addEventListener('mousedown', () => drawing = true);
+            canvas.addEventListener('mouseup', () => drawing = false);
+            canvas.addEventListener('mousemove', (e) => {
+                if (drawing) {
+                    const rect = canvas.getBoundingClientRect();
+                    ctx.fillStyle = '#4A90E2';
+                    ctx.beginPath();
+                    ctx.arc(e.clientX - rect.left, e.clientY - rect.top, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+        }
+
+        function startDance() {
+            let time = 30;
+            const timerDisplay = document.getElementById('danceTimer');
+            const affirmation = document.getElementById('danceAffirmation');
+            const interval = setInterval(() => {
+                time--;
+                timerDisplay.textContent = time;
+                if (time <= 0) {
+                    clearInterval(interval);
+                    affirmation.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function startColorFocus() {
+            let time = 60;
+            const timerDisplay = document.getElementById('colorFocusTimer');
+            const affirmation = document.getElementById('colorFocusAffirmation');
+            const interval = setInterval(() => {
+                time--;
+                timerDisplay.textContent = time;
+                if (time <= 0) {
+                    clearInterval(interval);
+                    affirmation.style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function shredWorry() {
+            const text = document.getElementById('worryText').value;
+            if (text) {
+                document.getElementById('worryText').style.display = 'none';
+                document.getElementById('worryAffirmation').style.display = 'block';
+            }
+        }
+
+        function saveGratitude() {
+            const text = document.getElementById('gratitudeText').value;
+            if (text) {
+                document.getElementById('gratitudeText').style.display = 'none';
+                document.getElementById('gratitudeAffirmation').style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
