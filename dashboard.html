@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MoodTask Dashboard - Track your mood and activities over time.">
+    <meta name="keywords" content="MoodTask, mood tracker, emotional well-being, mental health dashboard">
+    <meta name="robots" content="index, follow">
+    <title>MoodTask - Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .nav-bar {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-bar .logo {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #4A90E2;
+        }
+        .nav-bar a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #4A90E2;
+            font-weight: 500;
+        }
+        .nav-bar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .nav-bar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .nav-bar .dropdown-content a {
+            color: #4A90E2;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+        }
+        .nav-bar .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+        .nav-bar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .hero {
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .calendar div {
+            background: #fff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .calendar .header {
+            background: #4A90E2;
+            color: white;
+            font-weight: 500;
+        }
+        .calendar .day:hover {
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+        .mood-history, .rate-mood {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        .mood-history h3, .rate-mood h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #2C3E50;
+        }
+        .mood-entry {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .mood-entry:last-child {
+            border-bottom: none;
+        }
+        .mood-entry span {
+            font-weight: 500;
+            color: #4A90E2;
+        }
+        .rate-mood {
+            text-align: center;
+        }
+        .tree-container {
+            position: relative;
+            width: 150px;
+            height: 300px;
+            margin: 20px auto;
+        }
+        .tree-svg {
+            width: 100%;
+            height: 100%;
+        }
+        .tree-fill-bar {
+            cursor: pointer;
+            transition: fill 0.3s;
+        }
+        .tree-fill-bar:hover {
+            opacity: 0.8;
+        }
+        #mood-slider {
+            width: 80%;
+            margin: 10px auto;
+        }
+        #mood-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+        #current-rating {
+            font-size: 1.1em;
+            margin-top: 10px;
+            color: #2C3E50;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .footer a {
+            color: #D6D1F5;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer .affiliate-note {
+            font-size: 0.8em;
+            color: #aaa;
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .footer .connect a {
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+        .footer .connect .coffee {
+            background-color: #FFC107;
+            color: #333;
+        }
+        .footer .connect .therapy {
+            background-color: #4A90E2;
+            color: white;
+        }
+        .footer .connect .mindfulness {
+            background-color: #6BCB77;
+            color: white;
+        }
+        @media (max-width: 600px) {
+            .nav-bar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px 20px;
+            }
+            .nav-bar div {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            .hero {
+                padding: 60px 15px;
+            }
+            .hero h1 {
+                font-size: 1.8em;
+            }
+            .calendar {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .tree-container {
+                width: 120px;
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="logo">MoodTask</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="calendar.html">Dashboard</a>
+            <div class="dropdown">
+                <a href="activities.html">Activities</a>
+                <div class="dropdown-content">
+                    <a href="activities.html#breathing">Breathing</a>
+                    <a href="activities.html#soundscape">Soundscape</a>
+                    <a href="activities.html#punching">Punching Bag</a>
+                    <a href="activities.html#stretch">Stretch</a>
+                    <a href="activities.html#doodle">Doodle</a>
+                    <a href="activities.html#dance">Dance</a>
+                    <a href="activities.html#color-focus">Color Focus</a>
+                    <a href="activities.html#worry">Worry</a>
+                    <a href="activities.html#gratitude">Gratitude</a>
+                </div>
+            </div>
+            <a href="music.html">Mood Music</a>
+            <a href="blog.html">Blog</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+        </div>
+    </div>
+    <div class="hero">
+        <h1>Your Mood Dashboard</h1>
+    </div>
+    <div class="content">
+        <div class="mood-history">
+            <h3>Recent Moods</h3>
+            <div id="mood-history-list">
+                <p>No mood history yet. Select a mood on the home page to start tracking.</p>
+            </div>
+        </div>
+        <div class="calendar">
+            <div class="header">Sun</div>
+            <div class="header">Mon</div>
+            <div class="header">Tue</div>
+            <div class="header">Wed</div>
+            <div class="header">Thu</div>
+            <div class="header">Fri</div>
+            <div class="header">Sat</div>
+            <div class="day" data-date="2025-04-01">1<br>😢<br>2 tasks</div>
+            <div class="day" data-date="2025-04-02">2<br>😊<br>1 task</div>
+            <div class="day" data-date="2025-04-03">3<br>😡<br>3 tasks</div>
+            <div class="day" data-date="2025-04-04">4<br>😴<br>0 tasks</div>
+            <div class="day" data-date="2025-04-05">5<br>🤗<br>2 tasks</div>
+            <div class="day" data-date="2025-04-06">6<br>😐<br>1 task</div>
+            <div class="day" data-date="2025-04-07">7<br>😊<br>2 tasks</div>
+            <div class="day" data-date="2025-04-08">8<br>😢<br>1 task</div>
+            <div class="day" data-date="2025-04-09">9<br>😡<br>2 tasks</div>
+            <div class="day" data-date="2025-04-10">10<br>😊<br>3 tasks</div>
+            <div class="day" data-date="2025-04-11">11<br>🤗<br>1 task</div>
+            <div class="day" data-date="2025-04-12">12<br>😴<br>0 tasks</div>
+            <div class="day" data-date="2025-04-13">13<br>😊<br>2 tasks</div>
+            <div class="day" data-date="2025-04-14">14<br>😐<br>1 task</div>
+            <div class="day" data-date="2025-04-15">15<br>😢<br>2 tasks</div>
+            <div class="day" data-date="2025-04-16">16<br>😊<br>1 task</div>
+            <div class="day" data-date="2025-04-17">17<br>😡<br>3 tasks</div>
+            <div class="day" data-date="2025-04-18">18<br>🤗<br>2 tasks</div>
+            <div class="day" data-date="2025-04-19">19<br>😴<br>0 tasks</div>
+            <div class="day" data-date="2025-04-20">20<br>😊<br>2 tasks</div>
+            <div class="day" data-date="2025-04-21">21<br>😐<br>1 task</div>
+            <div class="day" data-date="2025-04-22">22<br>😢<br>2 tasks</div>
+            <div class="day" data-date="2025-04-23">23<br>😊<br>1 task</div>
+            <div class="day" data-date="2025-04-24">24<br>😡<br>3 tasks</div>
+            <div class="day" data-date="2025-04-25">25<br>🤗<br>2 tasks</div>
+            <div class="day" data-date="2025-04-26">26<br>😴<br>0 tasks</div>
+            <div class="day" data-date="2025-04-27">27<br>😊<br>2 tasks</div>
+            <div class="day" data-date="2025-04-28">28<br>😐<br>1 task</div>
+            <div class="day" data-date="2025-04-29">29<br>😢<br>2 tasks</div>
+            <div class="day" data-date="2025-04-30">30<br>😊<br>1 task</div>
+        </div>
+        <div class="rate-mood">
+            <h3>Rate Your Mood</h3>
+            <p>Rate your mood from 1 (Depressed, Sad, Angry) to 10 (Relaxed, Happy, Excited).</p>
+            <div class="tree-container">
+                <svg class="tree-svg" viewBox="0 0 100 200" preserveAspectRatio="xMidYMid meet">
+                    <!-- Tree trunk -->
+                    <rect x="40" y="50" width="20" height="150" fill="#8B4513"/>
+                    <!-- Tree foliage outline -->
+                    <path d="M50 50 Q0 100 50 150 Q100 100 50 50 Z" fill="none" stroke="#2C3E50" stroke-width="2"/>
+                    <!-- Horizontal bars for mood levels -->
+                    <rect class="tree-fill-bar" data-level="1" x="25" y="145" width="50" height="10" fill="#EF4444"/>
+                    <rect class="tree-fill-bar" data-level="2" x="25" y="135" width="50" height="10" fill="#F87171"/>
+                    <rect class="tree-fill-bar" data-level="3" x="25" y="125" width="50" height="10" fill="#FBBF24"/>
+                    <rect class="tree-fill-bar" data-level="4" x="25" y="115" width="50" height="10" fill="#FCD34D"/>
+                    <rect class="tree-fill-bar" data-level="5" x="25" y="105" width="50" height="10" fill="#FDE68A"/>
+                    <rect class="tree-fill-bar" data-level="6" x="25" y="95" width="50" height="10" fill="#D1D5DB"/>
+                    <rect class="tree-fill-bar" data-level="7" x="25" y="85" width="50" height="10" fill="#A3E635"/>
+                    <rect class="tree-fill-bar" data-level="8" x="25" y="75" width="50" height="10" fill="#84CC16"/>
+                    <rect class="tree-fill-bar" data-level="9" x="25" y="65" width="50" height="10" fill="#4ADE80"/>
+                    <rect class="tree-fill-bar" data-level="10" x="25" y="55" width="50" height="10" fill="#10B981"/>
+                </svg>
+            </div>
+            <input type="range" id="mood-slider" min="1" max="10" value="1">
+            <div id="mood-labels">
+                <span>1 (Worst)</span>
+                <span>10 (Best)</span>
+            </div>
+            <p id="current-rating">Current Rating: 1</p>
+        </div>
+    </div>
+    <div class="footer">
+        <div>
+            <h3>MoodTask</h3>
+            <p>Transform your mood with science-backed activities designed to improve your emotional well-being.</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+        </div>
+        <div class="connect">
+            <h3>Connect</h3>
+            <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
+            <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+            <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
+            <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
+        </div>
+        <div class="affiliate-note">
+            AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
+            © 2025 MoodTask. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load and display recent moods (placeholder until index.html tracks moods)
+            const moodHistoryList = document.getElementById('mood-history-list');
+            let moodHistory = JSON.parse(localStorage.getItem('moodHistory')) || [];
+            if (moodHistory.length === 0) {
+                moodHistoryList.innerHTML = '<p>No mood history yet. Select a mood on the home page to start tracking.</p>';
+            } else {
+                moodHistoryList.innerHTML = moodHistory.map(entry => {
+                    const date = new Date(entry.timestamp);
+                    return `<div class="mood-entry">You felt <span>${entry.mood}</span> on ${date.toLocaleString()}</div>`;
+                }).join('');
+            }
+
+            // Rate Your Mood functionality
+            const treeBars = document.querySelectorAll('.tree-fill-bar');
+            const moodSlider = document.getElementById('mood-slider');
+            const currentRatingText = document.getElementById('current-rating');
+
+            // Load saved mood rating
+            const savedRating = localStorage.getItem('moodRating') || 1;
+            moodSlider.value = savedRating;
+            updateTree(savedRating);
+
+            // Update tree when slider changes
+            moodSlider.addEventListener('input', () => {
+                const rating = parseInt(moodSlider.value);
+                updateTree(rating);
+                localStorage.setItem('moodRating', rating);
+            });
+
+            // Update tree when a bar is clicked
+            treeBars.forEach(bar => {
+                bar.addEventListener('click', () => {
+                    const level = parseInt(bar.getAttribute('data-level'));
+                    moodSlider.value = level;
+                    updateTree(level);
+                    localStorage.setItem('moodRating', level);
+                });
+            });
+
+            // Function to update the tree fill based on rating
+            function updateTree(rating) {
+                treeBars.forEach(bar => {
+                    const level = parseInt(bar.getAttribute('data-level'));
+                    if (level <= rating) {
+                        bar.style.opacity = '1';
+                    } else {
+                        bar.style.opacity = '0.2';
+                    }
+                });
+                currentRatingText.textContent = `Current Rating: ${rating}`;
+            }
+        });
+    </script>
+</body>
+</html>
