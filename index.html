@@ -35,11 +35,22 @@
             font-weight: 600;
             color: #4A90E2;
         }
+        .nav-bar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Increased spacing between links */
+        }
         .nav-bar a {
-            margin: 0 10px;
+            padding: 8px 12px; /* Added padding for better click area and spacing */
             text-decoration: none;
             color: #4A90E2;
             font-weight: 500;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 5px; /* Subtle rounding for professional look */
+        }
+        .nav-bar a:hover {
+            background-color: #f0f0f0;
+            color: #2C3E50;
         }
         .nav-bar .dropdown {
             position: relative;
@@ -53,6 +64,8 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             z-index: 1;
             border-radius: 5px;
+            top: 100%; /* Ensure dropdown appears below the link */
+            left: 0;
         }
         .nav-bar .dropdown-content a {
             color: #4A90E2;
@@ -103,7 +116,7 @@
             margin-top: 20px;
             opacity: 0;
             transform: translateY(10px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 1s ease, transform 1s ease; /* Increased duration to 1s for slower fade-in */
         }
         .mood-grid.active {
             display: flex;
@@ -263,8 +276,7 @@
                 gap: 10px;
                 padding: 15px 20px;
             }
-            .nav-bar div {
-                display: flex;
+            .nav-bar .nav-links {
                 flex-direction: column;
                 gap: 10px;
                 align-items: center;
@@ -309,7 +321,7 @@
 <body>
     <div class="nav-bar">
         <div class="logo">MoodTask</div>
-        <div>
+        <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="calendar.html">Dashboard</a>
             <div class="dropdown">
@@ -591,6 +603,16 @@
             const grid = document.getElementById('moodGrid');
             if (grid) {
                 grid.classList.remove('active');
+            }
+
+            // Save the first mood of the day to localStorage
+            const today = new Date().toISOString().split('T')[0]; // e.g., "2025-04-25"
+            const storedMood = localStorage.getItem(`mood-${today}`);
+            if (!storedMood) {
+                localStorage.setItem(`mood-${today}`, mood);
+                console.log(`Saved mood for ${today}: ${mood}`);
+            } else {
+                console.log(`Mood already saved for ${today}: ${storedMood}`);
             }
         }
 
