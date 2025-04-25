@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MoodTask helps you improve your mood with personalized, science-backed activities.">
+    <meta name="keywords" content="MoodTask, mental health, mood tracker, emotional well-being, stress relief">
+    <meta name="robots" content="index, follow">
     <title>MoodTask - Transform Your Mood</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
@@ -20,6 +25,10 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
         .nav-bar .logo {
             font-size: 1.5em;
@@ -59,101 +68,108 @@
             display: block;
         }
         .hero {
-            background: linear-gradient(135deg, #2C3E50, #4A90E2);
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
             color: white;
-            text-align: center;
             padding: 100px 20px;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            text-align: center;
+            margin-top: 60px;
         }
         .hero h1 {
-            font-size: 3em;
-            margin: 0;
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
         .hero p {
             font-size: 1.2em;
-            margin: 20px 0;
+            margin-bottom: 30px;
         }
-        .mood-input {
-            display: flex;
-            justify-content: center;
+        .mood-button {
+            padding: 15px 30px;
+            background-color: #FFC107;
+            color: #333;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .mood-button:hover {
+            background-color: #FFB300;
+        }
+        .mood-dropdown {
+            display: none;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            position: relative;
+            z-index: 10;
+        }
+        .mood-dropdown.active {
+            display: block;
+        }
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 10px;
         }
-        .mood-input select {
-            padding: 10px;
-            font-size: 1em;
-            border-radius: 20px;
-            border: 1px solid #ccc;
-            background-color: #fff;
+        .mood-option {
+            background-color: #D6D1F5;
             color: #333;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .mood-input button {
-            padding: 10px 20px;
+        .mood-option:hover {
             background-color: #4A90E2;
             color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-        .mood-input button:hover {
-            background-color: #3a7bc8;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-        .recommendations {
-            margin: 20px 0;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: none;
         }
         .recommendation {
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .popup {
             display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            z-index: 1000;
-        }
-        .popup.active {
-            display: block;
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
-        .overlay.active {
-            display: block;
-        }
-        .breathing-circle {
-            width: 100px;
-            height: 100px;
-            background-color: #4A90E2;
-            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 600px;
             margin: 20px auto;
+            text-align: left;
+        }
+        .recommendation.active {
+            display: block;
+        }
+        .recommendation h3 {
+            color: #4A90E2;
+            margin-bottom: 10px;
+        }
+        .recommendation p {
+            color: #555;
+            line-height: 1.6;
+        }
+        .recommendation a {
+            color: #4A90E2;
+            text-decoration: underline;
+        }
+        .recommendation a:hover {
+            color: #2C3E50;
+        }
+        .expert-explanation {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        .ad-placeholder {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .ad-placeholder img {
+            max-width: 100%;
+            border-radius: 10px;
         }
         .footer {
             background-color: #333;
@@ -208,14 +224,27 @@
             background-color: #6BCB77;
             color: white;
         }
-        .ad-placeholder {
-            margin-top: 20px;
-            text-align: center;
-            width: 100%;
-        }
-        .ad-placeholder p {
-            font-size: 0.8em;
-            color: #aaa;
+        @media (max-width: 600px) {
+            .nav-bar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px 20px;
+            }
+            .nav-bar div {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            .hero {
+                padding: 60px 15px;
+            }
+            .hero h1 {
+                font-size: 1.8em;
+            }
+            .mood-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -247,100 +276,138 @@
     </div>
     <div class="hero">
         <h1>Transform Your Mood</h1>
-        <p>Enter your current mood below, and we’ll suggest science-backed activities to help you feel better.</p>
-        <div class="mood-input">
-            <select id="moodSelect" onchange="submitMood()">
-                <option value="">How are you feeling?</option>
-                <option value="Tired">Tired</option>
-                <option value="Stressed">Stressed</option>
-                <option value="Sad">Sad</option>
-                <option value="Angry">Angry</option>
-                <option value="Happy">Happy</option>
-                <option value="Anxious">Anxious</option>
-                <option value="Overwhelmed">Overwhelmed</option>
-                <option value="Lonely">Lonely</option>
-                <option value="Frustrated">Frustrated</option>
-                <option value="Bored">Bored</option>
-                <option value="Irritable">Irritable</option>
-                <option value="Hopeless">Hopeless</option>
-                <option value="Nervous">Nervous</option>
-                <option value="Unmotivated">Unmotivated</option>
-                <option value="Confused">Confused</option>
-            </select>
-            <button onclick="submitMood()">Submit</button>
+        <p>Discover science-backed activities tailored to how you feel right now.</p>
+        <button class="mood-button" onclick="toggleMoodDropdown()">How are you feeling?</button>
+    </div>
+    <div class="mood-dropdown" id="moodDropdown">
+        <h3>Select Your Mood</h3>
+        <div class="mood-grid">
+            <div class="mood-option" onclick="showRecommendation('Happy')">Happy</div>
+            <div class="mood-option" onclick="showRecommendation('Sad')">Sad</div>
+            <div class="mood-option" onclick="showRecommendation('Angry')">Angry</div>
+            <div class="mood-option" onclick="showRecommendation('Anxious')">Anxious</div>
+            <div class="mood-option" onclick="showRecommendation('Stressed')">Stressed</div>
+            <div class="mood-option" onclick="showRecommendation('Tired')">Tired</div>
+            <div class="mood-option" onclick="showRecommendation('Excited')">Excited</div>
+            <div class="mood-option" onclick="showRecommendation('Bored')">Bored</div>
+            <div class="mood-option" onclick="showRecommendation('Frustrated')">Frustrated</div>
+            <div class="mood-option" onclick="showRecommendation('Relaxed')">Relaxed</div>
         </div>
     </div>
-    <div class="container">
-        <div class="recommendations" id="recommendations">
-            <h3 id="recTitle"></h3>
-            <div id="recList"></div>
+    <div class="recommendation" id="HappyRecommendation">
+        <h3>You're Feeling Happy!</h3>
+        <p>Keep that positive energy flowing with these activities:</p>
+        <ul>
+            <li><a href="activities.html#dance">Dance</a>: Move to your favorite music to boost endorphins.</li>
+            <li><a href="activities.html#gratitude">Gratitude Practice</a>: Reflect on what’s making you smile.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Andrew Huberman):</strong> Dancing stimulates the release of dopamine and serotonin, reinforcing positive emotions. Huberman notes that rhythmic movement activates the brain’s reward centers, enhancing mood stability. Gratitude practice strengthens neural pathways associated with optimism, increasing resilience.
         </div>
     </div>
-    <div class="overlay" id="overlay"></div>
-    <div class="popup" id="breathingPopup">
-        <h3>Breathing Exercise</h3>
-        <p>Breathe in deeply...</p>
-        <div class="breathing-circle" id="breathingCircle"></div>
-        <p>Time remaining: <span id="breathingTimer">60</span>s</p>
-        <p id="breathingAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('breathingPopup')">Close</button>
+    <div class="recommendation" id="SadRecommendation">
+        <h3>You're Feeling Sad</h3>
+        <p>Let’s lift your spirits with these activities:</p>
+        <ul>
+            <li><a href="activities.html#gratitude">Gratitude Practice</a>: Write down three things you’re thankful for.</li>
+            <li><a href="activities.html#soundscape">Soundscape</a>: Listen to calming ocean waves.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Andrew Huberman):</strong> Gratitude activates the prefrontal cortex, which regulates emotional processing, reducing sadness. Huberman explains that nature sounds like waves lower amygdala activity, calming emotional distress and promoting relaxation.
+        </div>
     </div>
-    <div class="popup" id="soundscapePopup">
-        <h3>Ocean Soundscape</h3>
-        <p>Listen to calming ocean waves...</p>
-        <p>Time remaining: <span id="soundscapeTimer">60</span>s</p>
-        <p id="soundscapeAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('soundscapePopup')">Close</button>
+    <div class="recommendation" id="AngryRecommendation">
+        <h3>You're Feeling Angry</h3>
+        <p>Channel that energy with these activities:</p>
+        <ul>
+            <li><a href="activities.html#punching">Punching Bag</a>: Release tension with a virtual punching bag.</li>
+            <li><a href="activities.html#breathing">Breathing Exercise</a>: Try deep breathing to calm down.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Andrew Huberman):</strong> Physical activity like punching reduces cortisol and adrenaline, dissipating anger. Huberman emphasizes that slow, deep breathing stimulates the vagus nerve, activating the parasympathetic nervous system to lower arousal and restore calm.
+        </div>
     </div>
-    <div class="popup" id="punchingPopup">
-        <h3>Punching Bag</h3>
-        <p>Click to punch: <span id="punchCount">0</span></p>
-        <p>Time remaining: <span id="punchingTimer">30</span>s</p>
-        <p id="punchingAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('punchingPopup')">Close</button>
+    <div class="recommendation" id="AnxiousRecommendation">
+        <h3>You're Feeling Anxious</h3>
+        <p>Ease your mind with these activities:</p>
+        <ul>
+            <li><a href="activities.html#breathing">Breathing Exercise</a>: Practice 4-7-8 breathing to relax.</li>
+            <li><a href="activities.html#color-focus">Color Focus</a>: Ground yourself by focusing on a color.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Andrew Huberman):</strong> The 4-7-8 breathing technique extends exhalation, triggering the parasympathetic response to reduce anxiety. Huberman notes that visual focus exercises like color focus engage the occipital lobe, diverting attention from anxious thoughts and stabilizing heart rate.
+        </div>
     </div>
-    <div class="popup" id="stretchPopup">
-        <h3>Stretch</h3>
-        <p>Follow this stretch routine...</p>
-        <p>Time remaining: <span id="stretchTimer">60</span>s</p>
-        <p id="stretchAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('stretchPopup')">Close</button>
+    <div class="recommendation" id="StressedRecommendation">
+        <h3>You're Feeling Stressed</h3>
+        <p>Relieve tension with these activities:</p>
+        <ul>
+            <li><a href="activities.html#stretch">Stretch</a>: Try a quick stretch routine or use a <a href="https://www.amazon.com/Weighted-Heated-Lap-Pad/dp/B09JKL2345?tag=moodtask-20">Weighted Heated Lap Pad</a>.</li>
+            <li><a href="activities.html#worry">Worry Shredder</a>: Write and shred your worries.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Andrew Huberman):</strong> Stretching releases muscle tension and boosts endorphins, counteracting stress. Weighted blankets stimulate deep pressure touch, which Huberman says calms the nervous system. Writing worries externalizes stress, reducing amygdala overactivity.
+        </div>
     </div>
-    <div class="popup" id="doodlePopup">
-        <h3>Doodle</h3>
-        <canvas id="doodleCanvas" width="300" height="200" style="border: 1px solid #ccc;"></canvas>
-        <p>Time remaining: <span id="doodleTimer">90</span>s</p>
-        <p id="doodleAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('doodlePopup')">Close</button>
+    <div class="recommendation" id="TiredRecommendation">
+        <h3>You're Feeling Tired</h3>
+        <p>Recharge with these activities:</p>
+        <ul>
+            <li><a href="activities.html#soundscape">Soundscape</a>: Listen to gentle rain sounds.</li>
+            <li><a href="activities.html#breathing">Breathing Exercise</a>: Try a relaxing breath cycle.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Matt Walker):</strong> Nature sounds like rain promote relaxation and improve sleep onset, as Walker explains in his sleep research. Slow breathing reduces heart rate and prepares the body for rest, enhancing sleep quality and combating fatigue.
+        </div>
     </div>
-    <div class="popup" id="dancePopup">
-        <h3>Dance Prompt</h3>
-        <p>Do a little twirl!</p>
-        <p>Time remaining: <span id="danceTimer">30</span>s</p>
-        <p id="danceAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('dancePopup')">Close</button>
+    <div class="recommendation" id="ExcitedRecommendation">
+        <h3>You're Feeling Excited</h3>
+        <p>Channel that enthusiasm with these activities:</p>
+        <ul>
+            <li><a href="activities.html#dance">Dance</a>: Move to upbeat music.</li>
+            <li><a href="activities.html#doodle">Doodle</a>: Express your energy creatively.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Andrew Huberman):</strong> Dancing amplifies dopamine release, sustaining excitement. Huberman notes that creative tasks like doodling engage the prefrontal cortex, channeling high energy into productive outlets and preventing overstimulation.
+        </div>
     </div>
-    <div class="popup" id="colorFocusPopup">
-        <h3>Color Focus</h3>
-        <div style="width: 100px; height: 100px; background-color: blue; margin: 20px auto;"></div>
-        <p>Focus on this color...</p>
-        <p>Time remaining: <span id="colorFocusTimer">60</span>s</p>
-        <p id="colorFocusAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('colorFocusPopup')">Close</button>
+    <div class="recommendation" id="BoredRecommendation">
+        <h3>You're Feeling Bored</h3>
+        <p>Spark some interest with these activities:</p>
+        <ul>
+            <li><a href="activities.html#doodle">Doodle</a>: Create a quick sketch.</li>
+            <li><a href="activities.html#dance">Dance</a>: Try a fun dance prompt.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Andrew Huberman):</strong> Creative activities like doodling stimulate the brain’s default mode network, combating boredom by fostering curiosity. Huberman explains that movement-based tasks like dancing increase norepinephrine, enhancing alertness and engagement.
+        </div>
     </div>
-    <div class="popup" id="worryPopup">
-        <h3>Worry Shredder</h3>
-        <textarea id="worryText" placeholder="Write your worry here..."></textarea>
-        <button onclick="shredWorry()">Shred It</button>
-        <p id="worryAffirmation" style="display: none;">Great job letting go!</p>
-        <button onclick="closePopup('worryPopup')">Close</button>
+    <div class="recommendation" id="FrustratedRecommendation">
+        <h3>You're Feeling Frustrated</h3>
+        <p>Reset with these activities:</p>
+        <ul>
+            <li><a href="activities.html#punching">Punching Bag</a>: Release frustration physically.</li>
+            <li><a href="activities.html#worry">Worry Shredder</a>: Write down what’s bothering you.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Andrew Huberman):</strong> Physical exertion like punching lowers cortisol, diffusing frustration. Huberman suggests that expressive writing reduces activity in the amygdala, helping process negative emotions and restore emotional balance.
+        </div>
     </div>
-    <div class="popup" id="gratitudePopup">
-        <h3>Gratitude Practice</h3>
-        <textarea id="gratitudeText" placeholder="What are you grateful for?"></textarea>
-        <button onclick="saveGratitude()">Save</button>
-        <p id="gratitudeAffirmation" style="display: none;">Great job reflecting!</p>
-        <button onclick="closePopup('gratitudePopup')">Close</button>
+    <div class="recommendation" id="RelaxedRecommendation">
+        <h3>You're Feeling Relaxed</h3>
+        <p>Enhance your calm with these activities:</p>
+        <ul>
+            <li><a href="activities.html#soundscape">Soundscape</a>: Enjoy soothing nature sounds.</li>
+            <li><a href="activities.html#gratitude">Gratitude Practice</a>: Reflect on positive moments.</li>
+        </ul>
+        <div class="expert-explanation">
+            <strong>Why it helps (Dr. Andrew Huberman):</strong> Nature sounds reduce sympathetic nervous system activity, deepening relaxation. Huberman notes that gratitude practices reinforce positive neural circuits, sustaining a calm and content state.
+        </div>
+    </div>
+    <div class="ad-placeholder">
+        <a href="https://www.amazon.com/Weighted-Blanket-Adults/dp/B08J4F5Z3K?tag=moodtask-20">
+            <img src="https://via.placeholder.com/600x100?text=Weighted+Blanket+Ad" alt="Weighted Blanket Ad">
+        </a>
     </div>
     <div class="footer">
         <div>
@@ -360,290 +427,49 @@
             <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
             <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
         </div>
-        <div class="ad-placeholder">
-            <p>Advertisement</p>
-            <!-- Google AdSense Placeholder -->
-            <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-1511837633001567" data-ad-slot="1234567890" data-ad-format="auto"></ins>
-        </div>
         <div class="affiliate-note">
             AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
             © 2025 MoodTask. All rights reserved.
         </div>
     </div>
     <script>
-        const moodTasks = {
-            Tired: [
-                { name: "Physiological Sigh", description: "Dr. Andrew Huberman recommends this to reduce fatigue by resetting the nervous system.", tool: "breathingPopup" },
-                { name: "Gratitude Note", description: "Dr. Robert Emmons suggests gratitude practices to boost energy through positivity.", tool: "gratitudePopup" },
-                { name: "Mindful Nap Prompt", description: "Dr. Matthew Walker advises short naps to restore energy without disrupting sleep cycles.", tool: "stretchPopup" }
-            ],
-            Stressed: [
-                { name: "Physiological Sigh", description: "Dr. Andrew Huberman notes this calms the amygdala, reducing stress.", tool: "breathingPopup" },
-                { name: "Ocean Soundscape", description: "Dr. Mark Hyman recommends nature sounds to lower cortisol levels.", tool: "soundscapePopup" },
-                { name: "Gratitude Practice", description: "Dr. Martin Seligman suggests shifting focus to reduce stress through positivity.", tool: "gratitudePopup" }
-            ],
-            Sad: [
-                { name: "Self-Compassion Practice", description: "Dr. Kristin Neff recommends self-compassion to ease emotional pain.", tool: "gratitudePopup" },
-                { name: "Reframe Through Movement", description: "Dr. Bessel van der Kolk suggests movement to release emotional tension.", tool: "dancePopup" },
-                { name: "Gratitude for Dopamine Boost", description: "Dr. Loretta Breuning advises creative expression to boost dopamine.", tool: "doodlePopup" }
-            ],
-            Angry: [
-                { name: "Punching Bag", description: "Dr. John Ratey recommends physical activity to release pent-up anger safely.", tool: "punchingPopup" },
-                { name: "Worry Shredder", description: "Dr. Edmund Bourne suggests writing and discarding worries to process anger.", tool: "worryPopup" },
-                { name: "Breathing Exercise", description: "Dr. Herbert Benson advises deep breathing to calm the fight-or-flight response.", tool: "breathingPopup" }
-            ],
-            Happy: [
-                { name: "Dance Prompt", description: "Dr. Tal Ben-Shahar suggests movement to amplify positive emotions.", tool: "dancePopup" },
-                { name: "Gratitude Note", description: "Dr. Sonja Lyubomirsky recommends savoring happiness through reflection.", tool: "gratitudePopup" },
-                { name: "Creative Expression", description: "Dr. Mihaly Csikszentmihalyi advises creative activities to enhance flow states.", tool: "doodlePopup" }
-            ],
-            Anxious: [
-                { name: "Worry Shredder", description: "Dr. David Burns recommends externalizing worries to reduce anxiety.", tool: "worryPopup" },
-                { name: "Breathing Exercise", description: "Dr. Richard Brown suggests rhythmic breathing to calm the nervous system.", tool: "breathingPopup" },
-                { name: "Color Focus", description: "Dr. Stephen Porges advises visual focus exercises to ground the mind.", tool: "colorFocusPopup" }
-            ],
-            Overwhelmed: [
-                { name: "Physiological Sigh", description: "Dr. Andrew Huberman recommends this to reset the nervous system.", tool: "breathingPopup" },
-                { name: "Reframe Through Movement", description: "Dr. Kelly McGonigal suggests movement to manage overwhelm.", tool: "stretchPopup" },
-                { name: "Ocean Soundscape", description: "Dr. Mark Hyman advises calming sounds to reduce sensory overload.", tool: "soundscapePopup" }
-            ],
-            Lonely: [
-                { name: "Gratitude Note", description: "Dr. John Cacioppo suggests gratitude to foster a sense of connection.", tool: "gratitudePopup" },
-                { name: "Creative Expression", description: "Dr. Lisa Feldman Barrett recommends creative outlets to process emotions.", tool: "doodlePopup" },
-                { name: "Dance Prompt", description: "Dr. Peter Lovatt advises movement to boost social feelings through endorphins.", tool: "dancePopup" }
-            ],
-            Frustrated: [
-                { name: "Punching Bag", description: "Dr. John Ratey suggests physical release to manage frustration.", tool: "punchingPopup" },
-                { name: "Worry Shredder", description: "Dr. Albert Ellis recommends reframing thoughts to reduce frustration.", tool: "worryPopup" },
-                { name: "Breathing Exercise", description: "Dr. Jon Kabat-Zinn advises mindfulness to calm the mind.", tool: "breathingPopup" }
-            ],
-            Bored: [
-                { name: "Creative Expression", description: "Dr. Teresa Amabile suggests creativity to combat boredom.", tool: "doodlePopup" },
-                { name: "Dance Prompt", description: "Dr. Stuart Brown recommends playful movement to stimulate engagement.", tool: "dancePopup" },
-                { name: "Color Focus", description: "Dr. Edward Hallowell advises visual tasks to spark interest.", tool: "colorFocusPopup" }
-            ],
-            Irritable: [
-                { name: "Breathing Exercise", description: "Dr. Daniel Siegel suggests mindfulness to reduce irritability.", tool: "breathingPopup" },
-                { name: "Ocean Soundscape", description: "Dr. Mark Hyman recommends nature sounds to soothe the nervous system.", tool: "soundscapePopup" },
-                { name: "Punching Bag", description: "Dr. John Ratey advises physical activity to release tension.", tool: "punchingPopup" }
-            ],
-            Hopeless: [
-                { name: "Gratitude Note", description: "Dr. Martin Seligman recommends gratitude to foster hope.", tool: "gratitudePopup" },
-                { name: "Reframe Through Movement", description: "Dr. Bessel van der Kolk suggests movement to shift emotional states.", tool: "dancePopup" },
-                { name: "Self-Compassion Practice", description: "Dr. Kristin Neff advises self-kindness to rebuild hope.", tool: "gratitudePopup" }
-            ],
-            Nervous: [
-                { name: "Breathing Exercise", description: "Dr. Richard Brown recommends slow breathing to calm nerves.", tool: "breathingPopup" },
-                { name: "Worry Shredder", description: "Dr. David Burns suggests externalizing fears to reduce nervousness.", tool: "worryPopup" },
-                { name: "Color Focus", description: "Dr. Stephen Porges advises grounding exercises to stabilize emotions.", tool: "colorFocusPopup" }
-            ],
-            Unmotivated: [
-                { name: "Dance Prompt", description: "Dr. John Ratey suggests movement to boost motivation through endorphins.", tool: "dancePopup" },
-                { name: "Creative Expression", description: "Dr. Teresa Amabile recommends creativity to spark inspiration.", tool: "doodlePopup" },
-                { name: "Gratitude Note", description: "Dr. Robert Emmons advises gratitude to shift focus to positive drivers.", tool: "gratitudePopup" }
-            ],
-            Confused: [
-                { name: "Color Focus", description: "Dr. Edward Hallowell suggests visual exercises to improve clarity.", tool: "colorFocusPopup" },
-                { name: "Breathing Exercise", description: "Dr. Jon Kabat-Zinn recommends mindfulness to center the mind.", tool: "breathingPopup" },
-                { name: "Ocean Soundscape", description: "Dr. Mark Hyman advises calming sounds to reduce mental fog.", tool: "soundscapePopup" }
-            ]
-        };
+        function toggleMoodDropdown() {
+            const dropdown = document.getElementById('moodDropdown');
+            dropdown.classList.toggle('active');
+        }
 
-        function submitMood() {
-            const moodSelect = document.getElementById('moodSelect');
-            const mood = moodSelect.value;
-            if (mood) {
-                saveMood(mood);
-                showRecommendations(mood);
+        function showRecommendation(mood) {
+            // Hide all recommendations
+            document.querySelectorAll('.recommendation').forEach(rec => {
+                rec.classList.remove('active');
+            });
+            // Show the selected mood's recommendation
+            const recommendation = document.getElementById(mood + 'Recommendation');
+            if (recommendation) {
+                recommendation.classList.add('active');
+            }
+            // Hide the mood dropdown
+            document.getElementById('moodDropdown').classList.remove('active');
+            // Log for debugging
+            console.log('Selected mood:', mood);
+        }
+
+        // Ensure DOM is fully loaded before attaching event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            const moodButton = document.querySelector('.mood-button');
+            if (moodButton) {
+                moodButton.addEventListener('click', toggleMoodDropdown);
             } else {
-                alert("Please select a mood.");
+                console.error('Mood button not found');
             }
-        }
-
-        function saveMood(mood) {
-            const today = new Date().toISOString().split('T')[0];
-            const moodData = JSON.parse(localStorage.getItem('moodData')) || {};
-            moodData[today] = { mood, timestamp: new Date().toISOString() };
-            localStorage.setItem('moodData', JSON.stringify(moodData));
-        }
-
-        function showRecommendations(mood) {
-            const recTitle = document.getElementById('recTitle');
-            const recList = document.getElementById('recList');
-            const recommendationsDiv = document.getElementById('recommendations');
-
-            recTitle.textContent = `Recommendations for ${mood} Mood:`;
-            recList.innerHTML = `<p style="font-style: italic;">You entered ${mood.toLowerCase()}</p>`;
-            moodTasks[mood].forEach(task => {
-                const div = document.createElement('div');
-                div.className = 'recommendation';
-                div.innerHTML = `
-                    <i class="fas fa-heart"></i>
-                    <div>
-                        <strong>${task.name}</strong>
-                        <p>${task.description}</p>
-                    </div>
-                    <button onclick="openPopup('${task.tool}')">Try Now</button>
-                `;
-                recList.appendChild(div);
+            const moodOptions = document.querySelectorAll('.mood-option');
+            moodOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const mood = option.textContent;
+                    showRecommendation(mood);
+                });
             });
-            recommendationsDiv.style.display = 'block';
-        }
-
-        function openPopup(popupId) {
-            document.getElementById(popupId).classList.add('active');
-            document.getElementById('overlay').classList.add('active');
-            if (popupId === 'breathingPopup') startBreathing();
-            if (popupId === 'soundscapePopup') startSoundscape();
-            if (popupId === 'punchingPopup') startPunching();
-            if (popupId === 'stretchPopup') startStretch();
-            if (popupId === 'doodlePopup') startDoodle();
-            if (popupId === 'dancePopup') startDance();
-            if (popupId === 'colorFocusPopup') startColorFocus();
-        }
-
-        function closePopup(popupId) {
-            document.getElementById(popupId).classList.remove('active');
-            document.getElementById('overlay').classList.remove('active');
-        }
-
-        function startBreathing() {
-            let time = 60;
-            const circle = document.getElementById('breathingCircle');
-            const timerDisplay = document.getElementById('breathingTimer');
-            const affirmation = document.getElementById('breathingAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                circle.style.transform = time % 10 < 5 ? 'scale(1.2)' : 'scale(1)';
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function startSoundscape() {
-            let time = 60;
-            const timerDisplay = document.getElementById('soundscapeTimer');
-            const affirmation = document.getElementById('soundscapeAffirmation');
-            the interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function startPunching() {
-            let time = 30;
-            let count = 0;
-            const timerDisplay = document.getElementById('punchingTimer');
-            const punchCount = document.getElementById('punchCount');
-            const affirmation = document.getElementById('punchingAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-            punchCount.parentElement.addEventListener('click', () => {
-                if (time > 0) {
-                    count++;
-                    punchCount.textContent = count;
-                }
-            });
-        }
-
-        function startStretch() {
-            let time = 60;
-            const timerDisplay = document.getElementById('stretchTimer');
-            const affirmation = document.getElementById('stretchAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function startDoodle() {
-            let time = 90;
-            const canvas = document.getElementById('doodleCanvas');
-            const ctx = canvas.getContext('2d');
-            let drawing = false;
-            const timerDisplay = document.getElementById('doodleTimer');
-            const affirmation = document.getElementById('doodleAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-            canvas.addEventListener('mousedown', () => drawing = true);
-            canvas.addEventListener('mouseup', () => drawing = false);
-            canvas.addEventListener('mousemove', (e) => {
-                if (drawing) {
-                    const rect = canvas.getBoundingClientRect();
-                    ctx.fillStyle = '#4A90E2';
-                    ctx.beginPath();
-                    ctx.arc(e.clientX - rect.left, e.clientY - rect.top, 2, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            });
-        }
-
-        function startDance() {
-            let time = 30;
-            const timerDisplay = document.getElementById('danceTimer');
-            const affirmation = document.getElementById('danceAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function startColorFocus() {
-            let time = 60;
-            const timerDisplay = document.getElementById('colorFocusTimer');
-            const affirmation = document.getElementById('colorFocusAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function shredWorry() {
-            const text = document.getElementById('worryText').value;
-            if (text) {
-                document.getElementById('worryText').style.display = 'none';
-                document.getElementById('worryAffirmation').style.display = 'block';
-            }
-        }
-
-        function saveGratitude() {
-            const text = document.getElementById('gratitudeText').value;
-            if (text) {
-                document.getElementById('gratitudeText').style.display = 'none';
-                document.getElementById('gratitudeAffirmation').style.display = 'block';
-            }
-        }
+        });
     </script>
 </body>
 </html>
