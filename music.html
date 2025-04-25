@@ -131,7 +131,7 @@
             text-align: center;
             width: 100%;
         }
-        .footer .connect button {
+        .footer .connect a {
             padding: 10px 20px;
             margin: 5px 0;
             border: none;
@@ -141,6 +141,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            text-decoration: none;
         }
         .footer .connect .coffee {
             background-color: #FFC107;
@@ -153,6 +154,15 @@
         .footer .connect .mindfulness {
             background-color: #6BCB77;
             color: white;
+        }
+        .ad-placeholder {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .ad-placeholder p {
+            font-size: 0.8em;
+            color: #aaa;
         }
     </style>
 </head>
@@ -178,38 +188,63 @@
             </div>
             <a href="music.html">Mood Music</a>
             <a href="blog.html">Blog</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
         </div>
     </div>
     <div class="container">
         <div class="music-section">
             <h2>Mood Music</h2>
             <div class="music-grid">
-                <div class="music-tile" onclick="alert('Calming music coming soon!')">
+                <div class="music-tile" onclick="window.location.href='https://www.amazon.com/Weighted-Blanket-Adults-15lbs/dp/B08XYZ1234?tag=moodtask-20'">
                     <i class="fas fa-water"></i>
                     <h3>Calming</h3>
-                    <p>Relax with soothing melodies like ocean waves and soft piano.</p>
+                    <p>Relax with soothing melodies or try a weighted blanket for comfort.</p>
                 </div>
-                <div class="music-tile" onclick="alert('Uplifting music coming soon!')">
-                    <i class="fas fa-sun"></i>
-                    <h3>Uplifting</h3>
-                    <p>Boost your mood with cheerful pop and upbeat acoustic tunes.</p>
+                <div class="music-tile" onclick="alert('Happy music coming soon!')">
+                    <i class="fas fa-smile"></i>
+                    <h3>Happy</h3>
+                    <p>Amplify your joy with cheerful pop and upbeat tunes.</p>
                 </div>
-                <div class="music-tile" onclick="alert('Energizing music coming soon!')">
+                <div class="music-tile" onclick="window.location.href='https://www.amazon.com/Stress-Balls-Set-Relief/dp/B09ABC4567?tag=moodtask-20'">
                     <i class="fas fa-bolt"></i>
                     <h3>Energizing</h3>
-                    <p>Get motivated with high-tempo electronic and rock music.</p>
+                    <p>Get motivated with high-tempo music or stress balls for focus.</p>
                 </div>
-                <div class="music-tile" onclick="alert('Focus music coming soon!')">
-                    <i class="fas fa-brain"></i>
-                    <h3>Focus</h3>
-                    <p>Enhance concentration with classical and lo-fi beats.</p>
+                <div class="music-tile" onclick="alert('Sad music coming soon!')">
+                    <i class="fas fa-frown"></i>
+                    <h3>Sad</h3>
+                    <p>Reflect with gentle acoustic or soulful melodies.</p>
                 </div>
-                <div class="music-tile" onclick="alert('Meditative music coming soon!')">
-                    <i class="fas fa-om"></i>
-                    <h3>Meditative</h3>
-                    <p>Deepen mindfulness with ambient sounds and chanting.</p>
+                <div class="music-tile" onclick="alert('Angry music coming soon!')">
+                    <i class="fas fa-angry"></i>
+                    <h3>Angry</h3>
+                    <p>Channel emotions with intense rock or powerful beats.</p>
+                </div>
+                <div class="music-tile" onclick="alert('Anxious music coming soon!')">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Anxious</h3>
+                    <p>Ease tension with ambient sounds or calming rhythms.</p>
+                </div>
+                <div class="music-tile" onclick="alert('Stressed music coming soon!')">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Stressed</h3>
+                    <p>Unwind with soft piano or nature-inspired tracks.</p>
+                </div>
+                <div class="music-tile" onclick="alert('Tired music coming soon!')">
+                    <i class="fas fa-bed"></i>
+                    <h3>Tired</h3>
+                    <p>Rest with tranquil melodies or lo-fi beats.</p>
+                </div>
+                <div class="music-tile" onclick="alert('Excited music coming soon!')">
+                    <i class="fas fa-star"></i>
+                    <h3>Excited</h3>
+                    <p>Boost energy with vibrant electronic or dance music.</p>
+                </div>
+                <div class="music-tile" onclick="alert('Bored music coming soon!')">
+                    <i class="fas fa-meh"></i>
+                    <h3>Bored</h3>
+                    <p>Engage with playful pop or creative soundscapes.</p>
                 </div>
             </div>
         </div>
@@ -222,15 +257,20 @@
         <div>
             <h3>Quick Links</h3>
             <a href="index.html">Home</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
         </div>
         <div class="connect">
             <h3>Connect</h3>
             <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
-            <button class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</button>
-            <button class="therapy">Online Therapy</button>
-            <button class="mindfulness">Mindfulness</button>
+            <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+            <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
+            <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
+        </div>
+        <div class="ad-placeholder">
+            <p>Advertisement</p>
+            <!-- Google AdSense Placeholder -->
+            <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-1511837633001567" data-ad-slot="1234567890" data-ad-format="auto"></ins>
         </div>
         <div class="affiliate-note">
             AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
