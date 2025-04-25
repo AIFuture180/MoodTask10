@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodTask - Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .nav-bar {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-bar .logo {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #4A90E2;
+        }
+        .nav-bar a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #4A90E2;
+            font-weight: 500;
+        }
+        .nav-bar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .nav-bar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .nav-bar .dropdown-content a {
+            color: #4A90E2;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            margin: 0;
+        }
+        .nav-bar .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+        .nav-bar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .blog-section {
+            margin: 40px 0;
+        }
+        .blog-section h2 {
+            color: #4A90E2;
+            border-bottom: 2px solid #D6D1F5;
+            padding-bottom: 10px;
+        }
+        .blog-post {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .blog-post h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .footer a {
+            color: #D6D1F5;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer .affiliate-note {
+            font-size: 0.8em;
+            color: #aaa;
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .footer .connect button {
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .footer .connect .coffee {
+            background-color: #FFC107;
+            color: #333;
+        }
+        .footer .connect .therapy {
+            background-color: #4A90E2;
+            color: white;
+        }
+        .footer .connect .mindfulness {
+            background-color: #6BCB77;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="logo">MoodTask</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="calendar.html">Dashboard</a>
+            <div class="dropdown">
+                <a href="activities.html">Activities</a>
+                <div class="dropdown-content">
+                    <a href="activities.html#breathing">Breathing</a>
+                    <a href="activities.html#soundscape">Soundscape</a>
+                    <a href="activities.html#punching">Punching Bag</a>
+                    <a href="activities.html#stretch">Stretch</a>
+                    <a href="activities.html#doodle">Doodle</a>
+                    <a href="activities.html#dance">Dance</a>
+                    <a href="activities.html#color-focus">Color Focus</a>
+                    <a href="activities.html#worry">Worry</a>
+                    <a href="activities.html#gratitude">Gratitude</a>
+                </div>
+            </div>
+            <a href="blog.html">Blog</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="blog-section">
+            <h2>Blog</h2>
+            <div class="blog-post">
+                <h3>The Science of Mood Tracking</h3>
+                <p>Learn how tracking your mood can improve emotional well-being. (Coming Soon)</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="blog-post">
+                <h3>5 Science-Backed Activities to Boost Your Mood</h3>
+                <p>Discover simple activities to lift your spirits. (Coming Soon)</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="blog-post">
+                <h3>The Benefits of Meditation Music</h3>
+                <p>Explore how music can enhance your meditation practice. (Coming Soon)</p>
+                <a href="#">Read More</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div>
+            <h3>MoodTask</h3>
+            <p>Transform your mood with science-backed activities designed to improve your emotional well-being.</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <a href="index.html">Home</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+        </div>
+        <div class="connect">
+            <h3>Connect</h3>
+            <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
+            <button class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</button>
+            <button class="therapy">Online Therapy</button>
+            <button class="mindfulness">Mindfulness</button>
+        </div>
+        <div class="affiliate-note">
+            AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
+            © 2025 MoodTask. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
