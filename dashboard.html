@@ -281,7 +281,7 @@
                 <p>No mood history yet. Select a mood on the home page to start tracking.</p>
             </div>
         </div>
-        <div class="calendar">
+        <div class="calendar" id="calendar">
             <div class="header">Sun</div>
             <div class="header">Mon</div>
             <div class="header">Tue</div>
@@ -289,36 +289,7 @@
             <div class="header">Thu</div>
             <div class="header">Fri</div>
             <div class="header">Sat</div>
-            <div class="day" data-date="2025-04-01">1<br>😢<br>2 tasks</div>
-            <div class="day" data-date="2025-04-02">2<br>😊<br>1 task</div>
-            <div class="day" data-date="2025-04-03">3<br>😡<br>3 tasks</div>
-            <div class="day" data-date="2025-04-04">4<br>😴<br>0 tasks</div>
-            <div class="day" data-date="2025-04-05">5<br>🤗<br>2 tasks</div>
-            <div class="day" data-date="2025-04-06">6<br>😐<br>1 task</div>
-            <div class="day" data-date="2025-04-07">7<br>😊<br>2 tasks</div>
-            <div class="day" data-date="2025-04-08">8<br>😢<br>1 task</div>
-            <div class="day" data-date="2025-04-09">9<br>😡<br>2 tasks</div>
-            <div class="day" data-date="2025-04-10">10<br>😊<br>3 tasks</div>
-            <div class="day" data-date="2025-04-11">11<br>🤗<br>1 task</div>
-            <div class="day" data-date="2025-04-12">12<br>😴<br>0 tasks</div>
-            <div class="day" data-date="2025-04-13">13<br>😊<br>2 tasks</div>
-            <div class="day" data-date="2025-04-14">14<br>😐<br>1 task</div>
-            <div class="day" data-date="2025-04-15">15<br>😢<br>2 tasks</div>
-            <div class="day" data-date="2025-04-16">16<br>😊<br>1 task</div>
-            <div class="day" data-date="2025-04-17">17<br>😡<br>3 tasks</div>
-            <div class="day" data-date="2025-04-18">18<br>🤗<br>2 tasks</div>
-            <div class="day" data-date="2025-04-19">19<br>😴<br>0 tasks</div>
-            <div class="day" data-date="2025-04-20">20<br>😊<br>2 tasks</div>
-            <div class="day" data-date="2025-04-21">21<br>😐<br>1 task</div>
-            <div class="day" data-date="2025-04-22">22<br>😢<br>2 tasks</div>
-            <div class="day" data-date="2025-04-23">23<br>😊<br>1 task</div>
-            <div class="day" data-date="2025-04-24">24<br>😡<br>3 tasks</div>
-            <div class="day" data-date="2025-04-25">25<br>🤗<br>2 tasks</div>
-            <div class="day" data-date="2025-04-26">26<br>😴<br>0 tasks</div>
-            <div class="day" data-date="2025-04-27">27<br>😊<br>2 tasks</div>
-            <div class="day" data-date="2025-04-28">28<br>😐<br>1 task</div>
-            <div class="day" data-date="2025-04-29">29<br>😢<br>2 tasks</div>
-            <div class="day" data-date="2025-04-30">30<br>😊<br>1 task</div>
+            <!-- Calendar days will be populated dynamically -->
         </div>
         <div class="rate-mood">
             <h3>Rate Your Mood</h3>
@@ -367,6 +338,7 @@
             <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
             <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
             <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
+            <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
         </div>
         <div class="affiliate-note">
             AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
@@ -375,17 +347,55 @@
     </div>
 
     <script>
+        // Mood to emoji mapping
+        const moodToEmoji = {
+            Sad: '😢',
+            Angry: '😡',
+            Frustrated: '😤',
+            Anxious: '😟',
+            Stressed: '😓',
+            Tired: '😴',
+            Bored: '🥱',
+            Excited: '🤗',
+            Relaxed: '😊',
+            Happy: '😊'
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
-            // Load and display recent moods (placeholder until index.html tracks moods)
+            // Load and display recent moods
             const moodHistoryList = document.getElementById('mood-history-list');
-            let moodHistory = JSON.parse(localStorage.getItem('moodHistory')) || [];
+            let moodHistory = [];
+            for (let i = 1; i <= 25; i++) { // Up to April 25, 2025
+                const date = `2025-04-${i.toString().padStart(2, '0')}`;
+                const mood = localStorage.getItem(`mood-${date}`);
+                if (mood) {
+                    moodHistory.push({ date, mood });
+                }
+            }
             if (moodHistory.length === 0) {
                 moodHistoryList.innerHTML = '<p>No mood history yet. Select a mood on the home page to start tracking.</p>';
             } else {
                 moodHistoryList.innerHTML = moodHistory.map(entry => {
-                    const date = new Date(entry.timestamp);
-                    return `<div class="mood-entry">You felt <span>${entry.mood}</span> on ${date.toLocaleString()}</div>`;
+                    return `<div class="mood-entry">You felt <span>${entry.mood}</span> on ${entry.date}</div>`;
                 }).join('');
+            }
+
+            // Populate the calendar dynamically
+            const calendar = document.getElementById('calendar');
+            const taskCounts = [
+                2, 1, 3, 0, 2, 1, 2, 1, 2, 3, 1, 0, 2, 1, 2, 1, 3, 2, 0, 2, 1, 2, 1, 3, 2
+            ]; // Preserved task counts from original calendar
+
+            for (let day = 1; day <= 25; day++) { // Up to April 25, 2025
+                const date = `2025-04-${day.toString().padStart(2, '0')}`;
+                const mood = localStorage.getItem(`mood-${date}`);
+                const emoji = mood ? moodToEmoji[mood] || '—' : '—';
+                const taskCount = taskCounts[day - 1];
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day';
+                dayElement.setAttribute('data-date', date);
+                dayElement.innerHTML = `${day}<br>${emoji}<br>${taskCount} tasks`;
+                calendar.appendChild(dayElement);
             }
 
             // Rate Your Mood functionality
