@@ -103,7 +103,7 @@
             margin-top: 20px;
             opacity: 0;
             transform: translateY(10px);
-            transition: opacity 1s ease, transform 1s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         .mood-grid.active {
             display: flex;
@@ -119,99 +119,57 @@
             cursor: pointer;
             transition: background-color 0.3s;
             font-size: 0.9em;
-            opacity: 0;
         }
-        .mood-grid.active .mood-option {
-            animation: fadeInScale 1s ease forwards;
-        }
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: translateY(10px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        .mood-option:nth-child(1) { animation-delay: 0s; }
-        .mood-option:nth-child(2) { animation-delay: 0.1s; }
-        .mood-option:nth-child(3) { animation-delay: 0.2s; }
-        .mood-option:nth-child(4) { animation-delay: 0.3s; }
-        .mood-option:nth-child(5) { animation-delay: 0.4s; }
-        .mood-option:nth-child(6) { animation-delay: 0.5s; }
-        .mood-option:nth-child(7) { animation-delay: 0.6s; }
-        .mood-option:nth-child(8) { animation-delay: 0.7s; }
-        .mood-option:nth-child(9) { animation-delay: 0.8s; }
-        .mood-option:nth-child(10) { animation-delay: 0.9s; }
         .mood-option:hover {
             background-color: #4A90E2;
             color: white;
         }
         .content-wrapper {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            max-width: 1320px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
         .recommendation {
             display: none;
             background-color: #fff;
-            padding: 25px;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            flex: 0 0 500px;
-            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex: 1;
+            max-width: 600px;
+            margin: 20px;
             text-align: left;
-            border-left: 4px solid #4A90E2;
         }
         .recommendation.active {
             display: block;
         }
         .recommendation h3 {
-            font-size: 1.5em;
-            font-weight: 600;
+            color: #4A90E2;
             margin-bottom: 10px;
-            background: linear-gradient(90deg, #4A90E2, #2C3E50);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         .recommendation p {
-            font-size: 1em;
-            font-weight: 400;
             color: #555;
             line-height: 1.6;
-            margin-bottom: 15px;
-        }
-        .recommendation ul {
-            padding-left: 20px;
-        }
-        .recommendation li {
-            font-size: 0.95em;
-            font-weight: 400;
-            line-height: 1.8;
-            color: #333;
         }
         .recommendation a {
             color: #4A90E2;
             text-decoration: underline;
         }
         .recommendation a:hover {
-            color: #FFC107;
+            color: #2C3E50;
         }
         .expert-explanation {
-            background-color: #f8f8f8;
+            background-color: #f0f0f0;
             padding: 15px;
             border-radius: 5px;
             margin-top: 15px;
-            font-size: 0.85em;
-            font-style: italic;
-            border-left: 2px solid #D6D1F5;
+            font-size: 0.9em;
         }
         .ad-player {
-            flex: 0 0 400px;
+            flex: 0 0 450px;
             margin: 20px;
             text-align: left;
             position: relative;
@@ -245,48 +203,6 @@
             color: #00843D;
             background-color: rgba(0, 166, 81, 0.2);
             text-decoration: underline;
-        }
-        .echo-ad {
-            flex: 0 0 400px;
-            margin: 20px;
-            text-align: left;
-            position: sticky;
-            top: 80px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            background-color: #f8f8f8;
-            border: 2px solid #D6D1F5;
-            transition: transform 0.3s;
-        }
-        .echo-ad:hover {
-            transform: scale(1.02);
-        }
-        .echo-ad img {
-            width: 100%;
-            max-width: 420px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: block;
-        }
-        .echo-ad-text {
-            margin: 10px 0;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #4A90E2;
-            text-align: center;
-            text-decoration: none;
-            background-color: rgba(74, 144, 226, 0.1);
-            padding: 8px 12px;
-            border-radius: 5px;
-            display: inline-block;
-            transition: color 0.3s, background-color 0.3s, box-shadow 0.3s;
-        }
-        .echo-ad-text:hover {
-            color: #2C3E50;
-            background-color: rgba(74, 144, 226, 0.2);
-            text-decoration: underline;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .footer {
             background-color: #333;
@@ -341,21 +257,6 @@
             background-color: #6BCB77;
             color: white;
         }
-        @media (max-width: 1200px) and (min-width: 601px) {
-            .content-wrapper {
-                gap: 20px;
-                max-width: 1120px;
-            }
-            .ad-player, .echo-ad {
-                flex: 0 0 350px;
-            }
-            .recommendation {
-                flex: 0 0 400px;
-            }
-            .echo-ad img {
-                max-width: 350px;
-            }
-        }
         @media (max-width: 600px) {
             .nav-bar {
                 flex-direction: column;
@@ -386,29 +287,19 @@
                 flex-direction: column;
                 padding: 0 10px;
             }
-            .ad-player,
-            .echo-ad,
-            .recommendation {
-                flex: 0 0 100%;
-                width: 350px;
+            .ad-player {
+                flex: 0 0 450px;
                 margin: 20px auto;
                 text-align: center;
             }
-            .echo-ad {
-                position: static;
-                padding: 15px;
-                margin-bottom: 30px;
+            .recommendation {
+                margin: 20px auto;
+                max-width: 100%;
             }
-            .ad-player {
-                padding: 15px;
-            }
-            .ad-player video,
-            .echo-ad img {
+            .ad-player video {
                 width: 100%;
-                max-width: 350px;
             }
-            .ad-player-text,
-            .echo-ad-text {
+            .ad-player-text {
                 font-size: 0.95em;
                 padding: 6px 10px;
             }
@@ -461,21 +352,13 @@
     <div class="content-wrapper">
         <div class="ad-player" id="adPlayer">
             <a href="https://amzn.to/4jbEB3h" target="_blank">
-                <video autoplay muted loop controls poster="https://via.placeholder.com/400x75?text=AG1+Video+Thumbnail">
+                <video autoplay muted loop controls poster="https://via.placeholder.com/450x75?text=AG1+Video+Thumbnail">
                     <source src="./AG1 Clip.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </a>
             <a href="https://amzn.to/4jbEB3h" target="_blank" class="ad-player-text">
                 AG1 is a daily health drink packed with nutrients to help alleviate bloating, support sustained energy and whole body health.
-            </a>
-        </div>
-        <div class="echo-ad">
-            <a href="https://amzn.to/42jEfjN" target="_blank">
-                <img src="./Echo_Go_Plus.jpg" alt="Echo Go+ Hydrogen Water Bottle">
-            </a>
-            <a href="https://amzn.to/42jEfjN" target="_blank" class="echo-ad-text">
-                Echo Go+ Hydrogen Water Bottle
             </a>
         </div>
         <div class="recommendation" id="SadRecommendation">
