@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #6a1b9a;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+nav a.active {
+    background-color: #8e24aa;
+    border-radius: 5px;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+#mood-selector {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+#mood-content {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-section {
+    margin-top: 2rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.music-grid, .activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.music-card, .activity-card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.music-card:hover, .activity-card:hover {
+    transform: translateY(-5px);
+}
+
+.sidebar {
+    max-width: 200px;
+    position: fixed;
+    right: 1rem;
+    top: 150px;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    margin-top: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #6a1b9a;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+a {
+    color: #00838f;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
