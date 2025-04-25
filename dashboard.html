@@ -105,14 +105,14 @@
             background: #f0f0f0;
             cursor: pointer;
         }
-        .mood-history, .rate-mood {
+        .mood-history {
             background: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             margin-top: 30px;
         }
-        .mood-history h3, .rate-mood h3 {
+        .mood-history h3 {
             margin-top: 0;
             font-size: 1.5em;
             color: #2C3E50;
@@ -127,42 +127,6 @@
         .mood-entry span {
             font-weight: 500;
             color: #4A90E2;
-        }
-        .rate-mood {
-            text-align: center;
-        }
-        .tree-container {
-            position: relative;
-            width: 150px;
-            height: 300px;
-            margin: 20px auto;
-        }
-        .tree-svg {
-            width: 100%;
-            height: 100%;
-        }
-        .tree-fill-bar {
-            cursor: pointer;
-            transition: fill 0.3s;
-        }
-        .tree-fill-bar:hover {
-            opacity: 0.8;
-        }
-        #mood-slider {
-            width: 80%;
-            margin: 10px auto;
-        }
-        #mood-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 10px;
-        }
-        #current-rating {
-            font-size: 1.1em;
-            margin-top: 10px;
-            color: #2C3E50;
         }
         .footer {
             background-color: #333;
@@ -238,10 +202,6 @@
             .calendar {
                 grid-template-columns: repeat(4, 1fr);
             }
-            .tree-container {
-                width: 120px;
-                height: 240px;
-            }
         }
     </style>
 </head>
@@ -290,35 +250,6 @@
             <div class="header">Fri</div>
             <div class="header">Sat</div>
             <!-- Calendar days will be populated dynamically -->
-        </div>
-        <div class="rate-mood">
-            <h3>Rate Your Mood</h3>
-            <p>Rate your mood from 1 (Depressed, Sad, Angry) to 10 (Relaxed, Happy, Excited).</p>
-            <div class="tree-container">
-                <svg class="tree-svg" viewBox="0 0 100 200" preserveAspectRatio="xMidYMid meet">
-                    <!-- Tree trunk -->
-                    <rect x="40" y="50" width="20" height="150" fill="#8B4513"/>
-                    <!-- Tree foliage outline -->
-                    <path d="M50 50 Q0 100 50 150 Q100 100 50 50 Z" fill="none" stroke="#2C3E50" stroke-width="2"/>
-                    <!-- Horizontal bars for mood levels -->
-                    <rect class="tree-fill-bar" data-level="1" x="25" y="145" width="50" height="10" fill="#EF4444"/>
-                    <rect class="tree-fill-bar" data-level="2" x="25" y="135" width="50" height="10" fill="#F87171"/>
-                    <rect class="tree-fill-bar" data-level="3" x="25" y="125" width="50" height="10" fill="#FBBF24"/>
-                    <rect class="tree-fill-bar" data-level="4" x="25" y="115" width="50" height="10" fill="#FCD34D"/>
-                    <rect class="tree-fill-bar" data-level="5" x="25" y="105" width="50" height="10" fill="#FDE68A"/>
-                    <rect class="tree-fill-bar" data-level="6" x="25" y="95" width="50" height="10" fill="#D1D5DB"/>
-                    <rect class="tree-fill-bar" data-level="7" x="25" y="85" width="50" height="10" fill="#A3E635"/>
-                    <rect class="tree-fill-bar" data-level="8" x="25" y="75" width="50" height="10" fill="#84CC16"/>
-                    <rect class="tree-fill-bar" data-level="9" x="25" y="65" width="50" height="10" fill="#4ADE80"/>
-                    <rect class="tree-fill-bar" data-level="10" x="25" y="55" width="50" height="10" fill="#10B981"/>
-                </svg>
-            </div>
-            <input type="range" id="mood-slider" min="1" max="10" value="1">
-            <div id="mood-labels">
-                <span>1 (Worst)</span>
-                <span>10 (Best)</span>
-            </div>
-            <p id="current-rating">Current Rating: 1</p>
         </div>
     </div>
     <div class="footer">
@@ -382,60 +313,15 @@
 
             // Populate the calendar dynamically
             const calendar = document.getElementById('calendar');
-            const taskCounts = [
-                2, 1, 3, 0, 2, 1, 2, 1, 2, 3, 1, 0, 2, 1, 2, 1, 3, 2, 0, 2, 1, 2, 1, 3, 2
-            ]; // Preserved task counts from original calendar
-
             for (let day = 1; day <= 25; day++) { // Up to April 25, 2025
                 const date = `2025-04-${day.toString().padStart(2, '0')}`;
                 const mood = localStorage.getItem(`mood-${date}`);
                 const emoji = mood ? moodToEmoji[mood] || '—' : '—';
-                const taskCount = taskCounts[day - 1];
                 const dayElement = document.createElement('div');
                 dayElement.className = 'day';
                 dayElement.setAttribute('data-date', date);
-                dayElement.innerHTML = `${day}<br>${emoji}<br>${taskCount} tasks`;
+                dayElement.innerHTML = `${day}<br>${emoji}`; // Only show day and mood emoji
                 calendar.appendChild(dayElement);
-            }
-
-            // Rate Your Mood functionality
-            const treeBars = document.querySelectorAll('.tree-fill-bar');
-            const moodSlider = document.getElementById('mood-slider');
-            const currentRatingText = document.getElementById('current-rating');
-
-            // Load saved mood rating
-            const savedRating = localStorage.getItem('moodRating') || 1;
-            moodSlider.value = savedRating;
-            updateTree(savedRating);
-
-            // Update tree when slider changes
-            moodSlider.addEventListener('input', () => {
-                const rating = parseInt(moodSlider.value);
-                updateTree(rating);
-                localStorage.setItem('moodRating', rating);
-            });
-
-            // Update tree when a bar is clicked
-            treeBars.forEach(bar => {
-                bar.addEventListener('click', () => {
-                    const level = parseInt(bar.getAttribute('data-level'));
-                    moodSlider.value = level;
-                    updateTree(level);
-                    localStorage.setItem('moodRating', level);
-                });
-            });
-
-            // Function to update the tree fill based on rating
-            function updateTree(rating) {
-                treeBars.forEach(bar => {
-                    const level = parseInt(bar.getAttribute('data-level'));
-                    if (level <= rating) {
-                        bar.style.opacity = '1';
-                    } else {
-                        bar.style.opacity = '0.2';
-                    }
-                });
-                currentRatingText.textContent = `Current Rating: ${rating}`;
             }
         });
     </script>
