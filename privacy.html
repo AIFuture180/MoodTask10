@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MoodTask Privacy Policy: Learn how we collect, use, and protect your personal information.">
+    <meta name="keywords" content="MoodTask, privacy policy, data protection, mental health">
+    <meta name="robots" content="index, follow">
     <title>MoodTask - Privacy Policy</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
@@ -20,6 +25,10 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
         .nav-bar .logo {
             font-size: 1.5em;
@@ -60,7 +69,7 @@
         }
         .container {
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 80px auto 20px auto;
             padding: 0 20px;
         }
         .policy-section {
@@ -70,17 +79,35 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .policy-section h2 {
+        .policy-section h2.section-heading {
+            font-size: 2em;
+            margin-bottom: 20px;
             color: #4A90E2;
             border-bottom: 2px solid #D6D1F5;
             padding-bottom: 10px;
+            text-align: center;
         }
         .policy-section h3 {
+            font-size: 1.5em;
+            margin: 20px 0 10px;
             color: #333;
-            margin-top: 20px;
         }
-        .policy-section p {
+        .policy-section p, .policy-section li {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 10px;
             line-height: 1.6;
+        }
+        .policy-section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        .policy-section a {
+            color: #4A90E2;
+            text-decoration: underline;
+        }
+        .policy-section a:hover {
+            color: #2C3E50;
         }
         .footer {
             background-color: #333;
@@ -134,6 +161,23 @@
             background-color: #6BCB77;
             color: white;
         }
+        @media (max-width: 600px) {
+            .nav-bar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px 20px;
+            }
+            .nav-bar div {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            .container {
+                padding: 0 15px;
+                margin-top: 120px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -164,51 +208,45 @@
     </div>
     <div class="container">
         <div class="policy-section">
-            <h2>Privacy Policy</h2>
-            <p>Last Updated: April 24, 2025</p>
-            <p>At MoodTask, we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website.</p>
-            
-            <h3>1. Information We Collect</h3>
+            <h2 class="section-heading">Privacy Policy</h2>
+            <p><em>Effective Date: April 19, 2025</em></p>
+            <p>At MoodTask, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our website and services.</p>
+
+            <h3>Information We Collect</h3>
             <p>We may collect the following types of information:</p>
             <ul>
-                <li><strong>Mood Data:</strong> When you log your mood using our tools, we store this information locally on your device using browser storage (e.g., localStorage).</li>
-                <li><strong>Usage Data:</strong> We may collect information about how you interact with our website, such as the pages you visit and the activities you engage with, to improve our services.</li>
-                <li><strong>Technical Data:</strong> We may collect device and browser information, such as your IP address, browser type, and operating system, to ensure the website functions properly.</li>
+                <li><strong>Personal Information</strong>: When you interact with our tools (e.g., Gratitude Note, Worry Shredder), you may provide personal information such as your mood entries or notes. We store this information temporarily to provide you with tailored recommendations.</li>
+                <li><strong>Usage Data</strong>: We automatically collect information about your interactions with our website, including your IP address, browser type, pages visited, and time spent on activities. This data is anonymized and used to improve our services.</li>
+                <li><strong>Cookies</strong>: We use cookies to enhance your experience, such as remembering your preferences. You can manage cookie settings in your browser.</li>
             </ul>
-            
-            <h3>2. How We Use Your Information</h3>
-            <p>We use the information we collect to:</p>
+
+            <h3>How We Use Your Information</h3>
+            <p>We use the collected information to:</p>
             <ul>
-                <li>Provide and improve our mood-tracking and activity recommendation services.</li>
-                <li>Understand how users interact with our website to enhance user experience.</li>
-                <li>Ensure the technical functionality and security of our website.</li>
+                <li>Provide personalized mood-based recommendations and activities.</li>
+                <li>Improve our website and services through analytics and user feedback.</li>
+                <li>Communicate with you, if you opt-in to receive updates or support.</li>
             </ul>
-            
-            <h3>3. How We Share Your Information</h3>
-            <p>We do not sell or share your personal information with third parties, except in the following cases:</p>
+            <p>We do not share your personal information with third parties, except as required by law or with your explicit consent (e.g., if you choose to explore affiliate links like Online Therapy).</p>
+
+            <h3>Data Security</h3>
+            <p>We implement reasonable security measures to protect your information from unauthorized access, alteration, or disclosure. However, no online system is completely secure, and we cannot guarantee absolute security.</p>
+
+            <h3>Your Rights</h3>
+            <p>You have the right to:</p>
             <ul>
-                <li><strong>Affiliate Links:</strong> Some links on our website (e.g., "Buy Me a Coffee") are affiliate links. If you make a purchase through these links, we may earn a commission at no extra cost to you.</li>
-                <li><strong>Legal Requirements:</strong> We may disclose your information if required by law or to protect the rights, property, or safety of MoodTask and its users.</li>
+                <li>Access or delete any personal information we have collected about you.</li>
+                <li>Opt-out of cookies or other tracking technologies.</li>
+                <li>Contact us at <a href="mailto:privacy@moodtask.org">privacy@moodtask.org</a> for any privacy-related requests.</li>
             </ul>
-            
-            <h3>4. Data Storage and Security</h3>
-            <p>Your mood data is stored locally on your device and is not transmitted to our servers. We implement reasonable security measures to protect the website from unauthorized access, but no system is completely secure, and we cannot guarantee absolute security.</p>
-            
-            <h3>5. Your Rights and Choices</h3>
-            <p>You have the following rights regarding your data:</p>
-            <ul>
-                <li><strong>Clear Data:</strong> You can clear your mood data by clearing your browser's local storage.</li>
-                <li><strong>Opt-Out:</strong> You can choose not to use our mood-tracking features if you do not wish to store data locally.</li>
-            </ul>
-            
-            <h3>6. Third-Party Links</h3>
-            <p>Our website contains links to third-party sites (e.g., Twitter, affiliate links). We are not responsible for the privacy practices of these sites. We encourage you to review their privacy policies before providing any personal information.</p>
-            
-            <h3>7. Changes to This Privacy Policy</h3>
-            <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Last Updated" date. We encourage you to review this policy periodically.</p>
-            
-            <h3>8. Contact Us</h3>
-            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:support@moodtask.org">support@moodtask.org</a>.</p>
+
+            <h3>Third-Party Links</h3>
+            <p>Our website contains links to third-party sites (e.g., Online Therapy, Buy Me a Coffee). We are not responsible for the privacy practices of these sites. We encourage you to review their privacy policies before sharing personal information.</p>
+
+            <h3>Changes to This Policy</h3>
+            <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date. We encourage you to review this policy periodically.</p>
+
+            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@moodtask.org">privacy@moodtask.org</a>.</p>
         </div>
     </div>
     <div class="footer">
