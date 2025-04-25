@@ -184,7 +184,7 @@
             text-align: center;
             width: 100%;
         }
-        .footer .connect button {
+        .footer .connect a {
             padding: 10px 20px;
             margin: 5px 0;
             border: none;
@@ -194,6 +194,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            text-decoration: none;
         }
         .footer .connect .coffee {
             background-color: #FFC107;
@@ -206,6 +207,15 @@
         .footer .connect .mindfulness {
             background-color: #6BCB77;
             color: white;
+        }
+        .ad-placeholder {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .ad-placeholder p {
+            font-size: 0.8em;
+            color: #aaa;
         }
     </style>
 </head>
@@ -231,8 +241,8 @@
             </div>
             <a href="music.html">Mood Music</a>
             <a href="blog.html">Blog</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
         </div>
     </div>
     <div class="hero">
@@ -340,15 +350,20 @@
         <div>
             <h3>Quick Links</h3>
             <a href="index.html">Home</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
         </div>
         <div class="connect">
             <h3>Connect</h3>
             <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
-            <button class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</button>
-            <button class="therapy">Online Therapy</button>
-            <button class="mindfulness">Mindfulness</button>
+            <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+            <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
+            <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
+        </div>
+        <div class="ad-placeholder">
+            <p>Advertisement</p>
+            <!-- Google AdSense Placeholder -->
+            <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-1511837633001567" data-ad-slot="1234567890" data-ad-format="auto"></ins>
         </div>
         <div class="affiliate-note">
             AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
@@ -512,7 +527,7 @@
             let time = 60;
             const timerDisplay = document.getElementById('soundscapeTimer');
             const affirmation = document.getElementById('soundscapeAffirmation');
-            const interval = setInterval(() => {
+            the interval = setInterval(() => {
                 time--;
                 timerDisplay.textContent = time;
                 if (time <= 0) {
