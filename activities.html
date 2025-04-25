@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodTask - Activities</title>
+    <title>MoodTask - Mood Music</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
@@ -63,71 +63,44 @@
             margin: 20px auto;
             padding: 0 20px;
         }
-        .tools-section {
+        .music-section {
             margin: 40px 0;
         }
-        .tools-section h2 {
+        .music-section h2 {
             color: #4A90E2;
             border-bottom: 2px solid #D6D1F5;
             padding-bottom: 10px;
         }
-        .tools-grid {
+        .music-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
-        .tool {
-            background-color: #fff;
+        .music-tile {
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 15px;
+            padding: 20px;
             text-align: center;
+            color: white;
             cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .tool i {
-            font-size: 1.5em;
-            color: #4A90E2;
+        .music-tile i {
+            font-size: 2em;
             margin-bottom: 10px;
         }
-        .tool:hover {
+        .music-tile h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .music-tile p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        .music-tile:hover {
             transform: scale(1.05);
-            transition: transform 0.2s;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            z-index: 1000;
-        }
-        .popup.active {
-            display: block;
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
-        .overlay.active {
-            display: block;
-        }
-        .breathing-circle {
-            width: 100px;
-            height: 100px;
-            background-color: #4A90E2;
-            border-radius: 50%;
-            margin: 20px auto;
         }
         .footer {
             background-color: #333;
@@ -192,130 +165,54 @@
             <div class="dropdown">
                 <a href="activities.html">Activities</a>
                 <div class="dropdown-content">
-                    <a href="#breathing">Breathing</a>
-                    <a href="#soundscape">Soundscape</a>
-                    <a href="#punching">Punching Bag</a>
-                    <a href="#stretch">Stretch</a>
-                    <a href="#doodle">Doodle</a>
-                    <a href="#dance">Dance</a>
-                    <a href="#color-focus">Color Focus</a>
-                    <a href="#worry">Worry</a>
-                    <a href="#gratitude">Gratitude</a>
+                    <a href="activities.html#breathing">Breathing</a>
+                    <a href="activities.html#soundscape">Soundscape</a>
+                    <a href="activities.html#punching">Punching Bag</a>
+                    <a href="activities.html#stretch">Stretch</a>
+                    <a href="activities.html#doodle">Doodle</a>
+                    <a href="activities.html#dance">Dance</a>
+                    <a href="activities.html#color-focus">Color Focus</a>
+                    <a href="activities.html#worry">Worry</a>
+                    <a href="activities.html#gratitude">Gratitude</a>
                 </div>
             </div>
+            <a href="music.html">Mood Music</a>
             <a href="blog.html">Blog</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Use</a>
         </div>
     </div>
     <div class="container">
-        <div class="tools-section">
-            <h2>All Activities</h2>
-            <div class="tools-grid">
-                <div class="tool" id="breathing" onclick="openPopup('breathingPopup')">
-                    <i class="fas fa-wind"></i>
-                    <p>Breathing</p>
+        <div class="music-section">
+            <h2>Mood Music</h2>
+            <div class="music-grid">
+                <div class="music-tile" onclick="alert('Calming music coming soon!')">
+                    <i class="fas fa-water"></i>
+                    <h3>Calming</h3>
+                    <p>Relax with soothing melodies like ocean waves and soft piano.</p>
                 </div>
-                <div class="tool" id="soundscape" onclick="openPopup('soundscapePopup')">
-                    <i class="fas fa-headphones"></i>
-                    <p>Soundscape</p>
+                <div class="music-tile" onclick="alert('Uplifting music coming soon!')">
+                    <i class="fas fa-sun"></i>
+                    <h3>Uplifting</h3>
+                    <p>Boost your mood with cheerful pop and upbeat acoustic tunes.</p>
                 </div>
-                <div class="tool" id="punching" onclick="openPopup('punchingPopup')">
-                    <i class="fas fa-fist-raised"></i>
-                    <p>Punching Bag</p>
+                <div class="music-tile" onclick="alert('Energizing music coming soon!')">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Energizing</h3>
+                    <p>Get motivated with high-tempo electronic and rock music.</p>
                 </div>
-                <div class="tool" id="stretch" onclick="openPopup('stretchPopup')">
-                    <i class="fas fa-running"></i>
-                    <p>Stretch</p>
+                <div class="music-tile" onclick="alert('Focus music coming soon!')">
+                    <i class="fas fa-brain"></i>
+                    <h3>Focus</h3>
+                    <p>Enhance concentration with classical and lo-fi beats.</p>
                 </div>
-                <div class="tool" id="doodle" onclick="openPopup('doodlePopup')">
-                    <i class="fas fa-pen"></i>
-                    <p>Doodle</p>
-                </div>
-                <div class="tool" id="dance" onclick="openPopup('dancePopup')">
-                    <i class="fas fa-music"></i>
-                    <p>Dance</p>
-                </div>
-                <div class="tool" id="color-focus" onclick="openPopup('colorFocusPopup')">
-                    <i class="fas fa-palette"></i>
-                    <p>Color Focus</p>
-                </div>
-                <div class="tool" id="worry" onclick="openPopup('worryPopup')">
-                    <i class="fas fa-trash"></i>
-                    <p>Worry</p>
-                </div>
-                <div class="tool" id="gratitude" onclick="openPopup('gratitudePopup')">
-                    <i class="fas fa-heart"></i>
-                    <p>Gratitude</p>
+                <div class="music-tile" onclick="alert('Meditative music coming soon!')">
+                    <i class="fas fa-om"></i>
+                    <h3>Meditative</h3>
+                    <p>Deepen mindfulness with ambient sounds and chanting.</p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="overlay" id="overlay"></div>
-    <div class="popup" id="breathingPopup">
-        <h3>Breathing Exercise</h3>
-        <p>Breathe in deeply...</p>
-        <div class="breathing-circle" id="breathingCircle"></div>
-        <p>Time remaining: <span id="breathingTimer">60</span>s</p>
-        <p id="breathingAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('breathingPopup')">Close</button>
-    </div>
-    <div class="popup" id="soundscapePopup">
-        <h3>Ocean Soundscape</h3>
-        <p>Listen to calming ocean waves...</p>
-        <p>Time remaining: <span id="soundscapeTimer">60</span>s</p>
-        <p id="soundscapeAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('soundscapePopup')">Close</button>
-    </div>
-    <div class="popup" id="punchingPopup">
-        <h3>Punching Bag</h3>
-        <p>Click to punch: <span id="punchCount">0</span></p>
-        <p>Time remaining: <span id="punchingTimer">30</span>s</p>
-        <p id="punchingAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('punchingPopup')">Close</button>
-    </div>
-    <div class="popup" id="stretchPopup">
-        <h3>Stretch</h3>
-        <p>Follow this stretch routine...</p>
-        <p>Time remaining: <span id="stretchTimer">60</span>s</p>
-        <p id="stretchAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('stretchPopup')">Close</button>
-    </div>
-    <div class="popup" id="doodlePopup">
-        <h3>Doodle</h3>
-        <canvas id="doodleCanvas" width="300" height="200" style="border: 1px solid #ccc;"></canvas>
-        <p>Time remaining: <span id="doodleTimer">90</span>s</p>
-        <p id="doodleAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('doodlePopup')">Close</button>
-    </div>
-    <div class="popup" id="dancePopup">
-        <h3>Dance Prompt</h3>
-        <p>Do a little twirl!</p>
-        <p>Time remaining: <span id="danceTimer">30</span>s</p>
-        <p id="danceAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('dancePopup')">Close</button>
-    </div>
-    <div class="popup" id="colorFocusPopup">
-        <h3>Color Focus</h3>
-        <div style="width: 100px; height: 100px; background-color: blue; margin: 20px auto;"></div>
-        <p>Focus on this color...</p>
-        <p>Time remaining: <span id="colorFocusTimer">60</span>s</p>
-        <p id="colorFocusAffirmation" style="display: none;">Great job!</p>
-        <button onclick="closePopup('colorFocusPopup')">Close</button>
-    </div>
-    <div class="popup" id="worryPopup">
-        <h3>Worry Shredder</h3>
-        <textarea id="worryText" placeholder="Write your worry here..."></textarea>
-        <button onclick="shredWorry()">Shred It</button>
-        <p id="worryAffirmation" style="display: none;">Great job letting go!</p>
-        <button onclick="closePopup('worryPopup')">Close</button>
-    </div>
-    <div class="popup" id="gratitudePopup">
-        <h3>Gratitude Practice</h3>
-        <textarea id="gratitudeText" placeholder="What are you grateful for?"></textarea>
-        <button onclick="saveGratitude()">Save</button>
-        <p id="gratitudeAffirmation" style="display: none;">Great job reflecting!</p>
-        <button onclick="closePopup('gratitudePopup')">Close</button>
     </div>
     <div class="footer">
         <div>
@@ -340,161 +237,5 @@
             © 2025 MoodTask. All rights reserved.
         </div>
     </div>
-    <script>
-        function openPopup(popupId) {
-            document.getElementById(popupId).classList.add('active');
-            document.getElementById('overlay').classList.add('active');
-            if (popupId === 'breathingPopup') startBreathing();
-            if (popupId === 'soundscapePopup') startSoundscape();
-            if (popupId === 'punchingPopup') startPunching();
-            if (popupId === 'stretchPopup') startStretch();
-            if (popupId === 'doodlePopup') startDoodle();
-            if (popupId === 'dancePopup') startDance();
-            if (popupId === 'colorFocusPopup') startColorFocus();
-        }
-
-        function closePopup(popupId) {
-            document.getElementById(popupId).classList.remove('active');
-            document.getElementById('overlay').classList.remove('active');
-        }
-
-        function startBreathing() {
-            let time = 60;
-            const circle = document.getElementById('breathingCircle');
-            const timerDisplay = document.getElementById('breathingTimer');
-            const affirmation = document.getElementById('breathingAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                circle.style.transform = time % 10 < 5 ? 'scale(1.2)' : 'scale(1)';
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function startSoundscape() {
-            let time = 60;
-            const timerDisplay = document.getElementById('soundscapeTimer');
-            const affirmation = document.getElementById('soundscapeAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function startPunching() {
-            let time = 30;
-            let count = 0;
-            const timerDisplay = document.getElementById('punchingTimer');
-            const punchCount = document.getElementById('punchCount');
-            const affirmation = document.getElementById('punchingAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-            punchCount.parentElement.addEventListener('click', () => {
-                if (time > 0) {
-                    count++;
-                    punchCount.textContent = count;
-                }
-            });
-        }
-
-        function startStretch() {
-            let time = 60;
-            const timerDisplay = document.getElementById('stretchTimer');
-            const affirmation = document.getElementById('stretchAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function startDoodle() {
-            let time = 90;
-            const canvas = document.getElementById('doodleCanvas');
-            const ctx = canvas.getContext('2d');
-            let drawing = false;
-            const timerDisplay = document.getElementById('doodleTimer');
-            const affirmation = document.getElementById('doodleAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-            canvas.addEventListener('mousedown', () => drawing = true);
-            canvas.addEventListener('mouseup', () => drawing = false);
-            canvas.addEventListener('mousemove', (e) => {
-                if (drawing) {
-                    const rect = canvas.getBoundingClientRect();
-                    ctx.fillStyle = '#4A90E2';
-                    ctx.beginPath();
-                    ctx.arc(e.clientX - rect.left, e.clientY - rect.top, 2, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            });
-        }
-
-        function startDance() {
-            let time = 30;
-            const timerDisplay = document.getElementById('danceTimer');
-            const affirmation = document.getElementById('danceAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function startColorFocus() {
-            let time = 60;
-            const timerDisplay = document.getElementById('colorFocusTimer');
-            const affirmation = document.getElementById('colorFocusAffirmation');
-            const interval = setInterval(() => {
-                time--;
-                timerDisplay.textContent = time;
-                if (time <= 0) {
-                    clearInterval(interval);
-                    affirmation.style.display = 'block';
-                }
-            }, 1000);
-        }
-
-        function shredWorry() {
-            const text = document.getElementById('worryText').value;
-            if (text) {
-                document.getElementById('worryText').style.display = 'none';
-                document.getElementById('worryAffirmation').style.display = 'block';
-            }
-        }
-
-        function saveGratitude() {
-            const text = document.getElementById('gratitudeText').value;
-            if (text) {
-                document.getElementById('gratitudeText').style.display = 'none';
-                document.getElementById('gratitudeAffirmation').style.display = 'block';
-            }
-        }
-    </script>
 </body>
 </html>
