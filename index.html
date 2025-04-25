@@ -159,41 +159,35 @@
             margin-top: 15px;
             font-size: 0.9em;
         }
-        .ad-placeholder {
+        .ad-player {
             max-width: 600px;
             margin: 20px auto;
             text-align: center;
             position: relative;
-            overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             transition: transform 0.3s;
         }
-        .ad-placeholder:hover {
+        .ad-player:hover {
             transform: scale(1.02);
             border: 2px solid #4A90E2;
         }
-        .ad-placeholder img {
+        .ad-player video {
             width: 100%;
-            height: 100px;
-            object-fit: cover;
             border-radius: 10px;
-            border: none;
-            opacity: 1;
-            transition: opacity 0.5s ease;
+            display: block;
         }
-        .ad-placeholder img.fading {
-            opacity: 0;
+        .ad-player-text {
+            margin: 10px 0;
+            font-size: 1em;
+            color: #4A90E2;
+            text-align: center;
+            text-decoration: none;
+            transition: color 0.3s;
         }
-        .ad-placeholder::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.3));
-            pointer-events: none;
+        .ad-player-text:hover {
+            color: #2C3E50;
+            text-decoration: underline;
         }
         .footer {
             background-color: #333;
@@ -274,8 +268,12 @@
                 padding: 8px 15px;
                 font-size: 0.8em;
             }
-            .ad-placeholder img {
-                height: 80px;
+            .ad-player video {
+                width: 100%;
+            }
+            .ad-player-text {
+                font-size: 0.9em;
+                padding: 0 10px;
             }
         }
     </style>
@@ -369,7 +367,7 @@
             </div>
             <li><a href="activities.html#worry">Worry Shredder</a>: Write down what’s bothering you.</li>
             <div class="expert-explanation">
-                <strong>Why it helps (Dr. Andrew Huberman):</strong> Expressive writing reduces amygdala activity, processing negative emotions, as Huberman’s work suggests.
+                <strong>Why it helps (Conventional wisdom):</strong> Expressive writing reduces amygdala activity, processing negative emotions, as suggested by psychological research.
             </div>
             <li><a href="activities.html#breathing">Breathing Exercise</a>: Try slow breathing.</li>
             <div class="expert-explanation">
@@ -503,9 +501,15 @@
             </div>
         </ul>
     </div>
-    <div class="ad-placeholder" id="adBanner">
-        <a id="adLink" href="https://amzn.to/4i6jcXK">
-            <img id="adImage" src="https://via.placeholder.com/600x100?text=Weighted+Heated+Lap+Pad" alt="Weighted Heated Lap Pad">
+    <div class="ad-player" id="adPlayer">
+        <a href="https://amzn.to/4jbEB3h" target="_blank">
+            <video controls poster="https://via.placeholder.com/600x100?text=AG1+Video+Thumbnail">
+                <source src="./AG1 Clip.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </a>
+        <a href="https://amzn.to/4jbEB3h" target="_blank" class="ad-player-text">
+            AG1 is a daily health drink packed with nutrients to help alleviate bloating, support sustained energy and whole body health.
         </a>
     </div>
     <div class="footer">
@@ -581,68 +585,18 @@
                 console.error('No mood options found');
             }
 
-            // Preload ad images to prevent blinking
-            const ads = [
-                {
-                    link: 'https://amzn.to/4i6jcXK',
-                    image: 'https://via.placeholder.com/600x100?text=Weighted+Heated+Lap+Pad',
-                    alt: 'Weighted Heated Lap Pad'
-                },
-                {
-                    link: 'https://amzn.to/4jo3R5Y',
-                    image: 'https://via.placeholder.com/600x100?text=Bearaby+Cotton+Hand-Knit+Weighted+Blanket',
-                    alt: 'Bearaby Cotton Hand-Knit Weighted Blanket'
-                },
-                {
-                    link: 'https://amzn.to/4ir7OWZ',
-                    image: 'https://via.placeholder.com/600x100?text=Serenilite+Stress+Balls',
-                    alt: 'Serenilite Stress Balls'
-                },
-                {
-                    link: 'https://amzn.to/4jbEB3h',
-                    image: 'https://via.placeholder.com/600x100?text=AG1+Supplement',
-                    alt: 'AG1 Supplement'
-                },
-                {
-                    link: 'https://amzn.to/42jEfjN',
-                    image: 'https://via.placeholder.com/600x100?text=Echo+Go+Hydrogen+Water+Bottle',
-                    alt: 'Echo Go+ Hydrogen Water Bottle'
-                }
-            ];
-
-            // Preload images
-            ads.forEach(ad => {
-                const img = new Image();
-                img.src = ad.image;
-            });
-
-            let currentAdIndex = 0;
-
-            function rotateAd() {
-                const adLink = document.getElementById('adLink');
-                const adImage = document.getElementById('adImage');
-                if (adLink && adImage) {
-                    // Add fading class to trigger opacity transition
-                    adImage.classList.add('fading');
-                    setTimeout(() => {
-                        const currentAd = ads[currentAdIndex];
-                        adLink.href = currentAd.link;
-                        adImage.src = currentAd.image;
-                        adImage.alt = currentAd.alt;
-                        adImage.classList.remove('fading');
-                        currentAdIndex = (currentAdIndex + 1) % ads.length;
-                        console.log('Rotated ad to:', currentAd.alt);
-                    }, 500); // Match CSS transition duration
-                } else {
-                    console.error('Ad elements not found');
-                }
+            // Ad player initialization
+            const adPlayer = document.getElementById('adPlayer');
+            if (adPlayer) {
+                console.log('Ad player initialized');
+                adPlayer.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'VIDEO') {
+                        console.log('Ad player video clicked, redirecting to affiliate link');
+                    }
+                });
+            } else {
+                console.error('Ad player element not found');
             }
-
-            // Initial ad display
-            rotateAd();
-
-            // Rotate every 8 seconds
-            setInterval(rotateAd, 8000);
         });
     </script>
 </body>
