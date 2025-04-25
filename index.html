@@ -95,33 +95,30 @@
         .mood-button:hover {
             background-color: #FFB300;
         }
-        .mood-dropdown {
-            display: none;
-            background-color: #fff;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            border-radius: 10px;
-            padding: 20px;
-            max-width: 600px;
-            margin: 20px auto;
-            position: relative;
-            z-index: 10;
-        }
-        .mood-dropdown.active {
-            display: block;
-        }
         .mood-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            display: none;
+            flex-direction: row;
+            justify-content: center;
             gap: 10px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .mood-grid.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
         }
         .mood-option {
             background-color: #D6D1F5;
             color: #333;
-            padding: 10px;
+            padding: 10px 20px;
             text-align: center;
-            border-radius: 5px;
+            border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-size: 0.9em;
         }
         .mood-option:hover {
             background-color: #4A90E2;
@@ -182,6 +179,11 @@
             object-fit: cover;
             border-radius: 10px;
             border: none;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        .ad-placeholder img.fading {
+            opacity: 0;
         }
         .ad-placeholder::after {
             content: '';
@@ -265,7 +267,12 @@
                 font-size: 1.8em;
             }
             .mood-grid {
-                grid-template-columns: 1fr;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .mood-option {
+                padding: 8px 15px;
+                font-size: 0.8em;
             }
             .ad-placeholder img {
                 height: 80px;
@@ -303,39 +310,18 @@
         <h1>Transform Your Mood</h1>
         <p>Discover science-backed activities tailored to how you feel right now.</p>
         <button class="mood-button" id="moodButton">How are you feeling?</button>
-    </div>
-    <div class="mood-dropdown" id="moodDropdown">
-        <h3>Select Your Mood</h3>
-        <div class="mood-grid">
-            <div class="mood-option" data-mood="Happy">Happy</div>
+        <div class="mood-grid" id="moodGrid">
             <div class="mood-option" data-mood="Sad">Sad</div>
             <div class="mood-option" data-mood="Angry">Angry</div>
+            <div class="mood-option" data-mood="Frustrated">Frustrated</div>
             <div class="mood-option" data-mood="Anxious">Anxious</div>
             <div class="mood-option" data-mood="Stressed">Stressed</div>
             <div class="mood-option" data-mood="Tired">Tired</div>
-            <div class="mood-option" data-mood="Excited">Excited</div>
             <div class="mood-option" data-mood="Bored">Bored</div>
-            <div class="mood-option" data-mood="Frustrated">Frustrated</div>
+            <div class="mood-option" data-mood="Excited">Excited</div>
             <div class="mood-option" data-mood="Relaxed">Relaxed</div>
+            <div class="mood-option" data-mood="Happy">Happy</div>
         </div>
-    </div>
-    <div class="recommendation" id="HappyRecommendation">
-        <h3>You're Feeling Happy!</h3>
-        <p>Keep that positive vibe going with these expert-recommended activities:</p>
-        <ul>
-            <li><a href="activities.html#dance">Dance</a>: Move to upbeat music to amplify your joy.</li>
-            <div class="expert-explanation">
-                <strong>Why it helps (Dr. Andrew Huberman):</strong> Dancing boosts dopamine and serotonin, reinforcing positive emotions. Huberman explains that rhythmic movement activates the brain’s reward centers, enhancing mood stability.
-            </div>
-            <li><a href="activities.html#gratitude">Gratitude Practice</a>: Write down three things you’re thankful for.</li>
-            <div class="expert-explanation">
-                <strong>Why it helps (Dr. Lisa Feldman Barrett):</strong> Gratitude reshapes emotional perception by focusing on positive experiences, strengthening neural pathways for optimism, as Barrett’s work on emotion construction suggests.
-            </div>
-            <li><a href="activities.html#doodle">Doodle</a>: Express your happiness through creative sketching.</li>
-            <div class="expert-explanation">
-                <strong>Why it helps (Dr. Andrew Huberman):</strong> Creative tasks like doodling engage the prefrontal cortex, channeling positive energy into productive outlets, per Huberman’s insights on neural creativity.
-            </div>
-        </ul>
     </div>
     <div class="recommendation" id="SadRecommendation">
         <h3>You're Feeling Sad</h3>
@@ -370,6 +356,24 @@
             <li><a href="activities.html#worry">Worry Shredder</a>: Write and shred your frustrations.</li>
             <div class="expert-explanation">
                 <strong>Why it helps (Dr. Andrew Huberman):</strong> Expressive writing externalizes anger, reducing amygdala activity and promoting clarity, per Huberman’s stress research.
+            </div>
+        </ul>
+    </div>
+    <div class="recommendation" id="FrustratedRecommendation">
+        <h3>You're Feeling Frustrated</h3>
+        <p>Reset with these activities:</p>
+        <ul>
+            <li><a href="activities.html#punching">Punching Bag</a>: Release frustration physically.</li>
+            <div class="expert-explanation">
+                <strong>Why it helps (Dr. Andrew Huberman):</strong> Physical exertion lowers cortisol, diffusing frustration and calming the amygdala, per Huberman’s stress research.
+            </div>
+            <li><a href="activities.html#worry">Worry Shredder</a>: Write down what’s bothering you.</li>
+            <div class="expert-explanation">
+                <strong>Why it helps (Dr. Andrew Huberman):</strong> Expressive writing reduces amygdala activity, processing negative emotions, as Huberman’s work suggests.
+            </div>
+            <li><a href="activities.html#breathing">Breathing Exercise</a>: Try slow breathing.</li>
+            <div class="expert-explanation">
+                <strong>Why it helps (Dr. Lisa Feldman Barrett):</strong> Breathing alters physiological arousal, reshaping frustration into calm, per Barrett’s emotion construction theory.
             </div>
         </ul>
     </div>
@@ -427,24 +431,6 @@
             </div>
         </ul>
     </div>
-    <div class="recommendation" id="ExcitedRecommendation">
-        <h3>You're Feeling Excited</h3>
-        <p>Channel your energy with these activities:</p>
-        <ul>
-            <li><a href="activities.html#dance">Dance</a>: Move to upbeat music.</li>
-            <div class="expert-explanation">
-                <strong>Why it helps (Dr. Andrew Huberman):</strong> Dancing amplifies dopamine, sustaining excitement and preventing overstimulation, per Huberman’s reward system research.
-            </div>
-            <li><a href="activities.html#doodle">Doodle</a>: Express your enthusiasm creatively.</li>
-            <div class="expert-explanation">
-                <strong>Why it helps (Dr. Lisa Feldman Barrett):</strong> Creative expression channels high arousal into positive outcomes, shaping emotional experiences, as Barrett’s work shows.
-            </div>
-            <li><a href="activities.html#gratitude">Gratitude Practice</a>: Reflect on what’s sparking your excitement.</li>
-            <div class="expert-explanation">
-                <strong>Why it helps (Dr. Andrew Huberman):</strong> Gratitude reinforces positive neural circuits, sustaining high energy, per Huberman’s insights on optimism.
-            </div>
-        </ul>
-    </div>
     <div class="recommendation" id="BoredRecommendation">
         <h3>You're Feeling Bored</h3>
         <p>Spark interest with these activities:</p>
@@ -463,21 +449,21 @@
             </div>
         </ul>
     </div>
-    <div class="recommendation" id="FrustratedRecommendation">
-        <h3>You're Feeling Frustrated</h3>
-        <p>Reset with these activities:</p>
+    <div class="recommendation" id="ExcitedRecommendation">
+        <h3>You're Feeling Excited</h3>
+        <p>Channel your energy with these activities:</p>
         <ul>
-            <li><a href="activities.html#punching">Punching Bag</a>: Release frustration physically.</li>
+            <li><a href="activities.html#dance">Dance</a>: Move to upbeat music.</li>
             <div class="expert-explanation">
-                <strong>Why it helps (Dr. Andrew Huberman):</strong> Physical exertion lowers cortisol, diffusing frustration and calming the amygdala, per Huberman’s stress research.
+                <strong>Why it helps (Dr. Andrew Huberman):</strong> Dancing amplifies dopamine, sustaining excitement and preventing overstimulation, per Huberman’s reward system research.
             </div>
-            <li><a href="activities.html#worry">Worry Shredder</a>: Write down what’s bothering you.</li>
+            <li><a href="activities.html#doodle">Doodle</a>: Express your enthusiasm creatively.</li>
             <div class="expert-explanation">
-                <strong>Why it helps (Dr. Andrew Huberman):</strong> Expressive writing reduces amygdala activity, processing negative emotions, as Huberman’s work suggests.
+                <strong>Why it helps (Dr. Lisa Feldman Barrett):</strong> Creative expression channels high arousal into positive outcomes, shaping emotional experiences, as Barrett’s work shows.
             </div>
-            <li><a href="activities.html#breathing">Breathing Exercise</a>: Try slow breathing.</li>
+            <li><a href="activities.html#gratitude">Gratitude Practice</a>: Reflect on what’s sparking your excitement.</li>
             <div class="expert-explanation">
-                <strong>Why it helps (Dr. Lisa Feldman Barrett):</strong> Breathing alters physiological arousal, reshaping frustration into calm, per Barrett’s emotion construction theory.
+                <strong>Why it helps (Dr. Andrew Huberman):</strong> Gratitude reinforces positive neural circuits, sustaining high energy, per Huberman’s insights on optimism.
             </div>
         </ul>
     </div>
@@ -496,6 +482,24 @@
             <li><a href="activities.html#stretch">Stretch</a>: Try a gentle stretch routine.</li>
             <div class="expert-explanation">
                 <strong>Why it helps (Dr. Andrew Huberman):</strong> Stretching maintains relaxation by releasing muscle tension and boosting endorphins, per Huberman’s work.
+            </div>
+        </ul>
+    </div>
+    <div class="recommendation" id="HappyRecommendation">
+        <h3>You're Feeling Happy!</h3>
+        <p>Keep that positive vibe going with these expert-recommended activities:</p>
+        <ul>
+            <li><a href="activities.html#dance">Dance</a>: Move to upbeat music to amplify your joy.</li>
+            <div class="expert-explanation">
+                <strong>Why it helps (Dr. Andrew Huberman):</strong> Dancing boosts dopamine and serotonin, reinforcing positive emotions. Huberman explains that rhythmic movement activates the brain’s reward centers, enhancing mood stability.
+            </div>
+            <li><a href="activities.html#gratitude">Gratitude Practice</a>: Write down three things you’re thankful for.</li>
+            <div class="expert-explanation">
+                <strong>Why it helps (Dr. Lisa Feldman Barrett):</strong> Gratitude reshapes emotional perception by focusing on positive experiences, strengthening neural pathways for optimism, as Barrett’s work on emotion construction suggests.
+            </div>
+            <li><a href="activities.html#doodle">Doodle</a>: Express your happiness through creative sketching.</li>
+            <div class="expert-explanation">
+                <strong>Why it helps (Dr. Andrew Huberman):</strong> Creative tasks like doodling engage the prefrontal cortex, channeling positive energy into productive outlets, per Huberman’s insights on neural creativity.
             </div>
         </ul>
     </div>
@@ -528,14 +532,14 @@
         </div>
     </div>
     <script>
-        // Mood Dropdown and Recommendation Logic
-        function toggleMoodDropdown() {
-            const dropdown = document.getElementById('moodDropdown');
-            if (dropdown) {
-                dropdown.classList.toggle('active');
-                console.log('Mood dropdown toggled:', dropdown.classList.contains('active') ? 'visible' : 'hidden');
+        // Mood Grid and Recommendation Logic
+        function toggleMoodGrid() {
+            const grid = document.getElementById('moodGrid');
+            if (grid) {
+                grid.classList.toggle('active');
+                console.log('Mood grid toggled:', grid.classList.contains('active') ? 'visible' : 'hidden');
             } else {
-                console.error('Mood dropdown element not found');
+                console.error('Mood grid element not found');
             }
         }
 
@@ -550,16 +554,16 @@
             } else {
                 console.error('Recommendation element not found for mood:', mood);
             }
-            const dropdown = document.getElementById('moodDropdown');
-            if (dropdown) {
-                dropdown.classList.remove('active');
+            const grid = document.getElementById('moodGrid');
+            if (grid) {
+                grid.classList.remove('active');
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const moodButton = document.getElementById('moodButton');
             if (moodButton) {
-                moodButton.addEventListener('click', toggleMoodDropdown);
+                moodButton.addEventListener('click', toggleMoodGrid);
                 console.log('Mood button event listener attached');
             } else {
                 console.error('Mood button not found');
@@ -576,59 +580,70 @@
             } else {
                 console.error('No mood options found');
             }
+
+            // Preload ad images to prevent blinking
+            const ads = [
+                {
+                    link: 'https://amzn.to/4i6jcXK',
+                    image: 'https://via.placeholder.com/600x100?text=Weighted+Heated+Lap+Pad',
+                    alt: 'Weighted Heated Lap Pad'
+                },
+                {
+                    link: 'https://amzn.to/4jo3R5Y',
+                    image: 'https://via.placeholder.com/600x100?text=Bearaby+Cotton+Hand-Knit+Weighted+Blanket',
+                    alt: 'Bearaby Cotton Hand-Knit Weighted Blanket'
+                },
+                {
+                    link: 'https://amzn.to/4ir7OWZ',
+                    image: 'https://via.placeholder.com/600x100?text=Serenilite+Stress+Balls',
+                    alt: 'Serenilite Stress Balls'
+                },
+                {
+                    link: 'https://amzn.to/4jbEB3h',
+                    image: 'https://via.placeholder.com/600x100?text=AG1+Supplement',
+                    alt: 'AG1 Supplement'
+                },
+                {
+                    link: 'https://amzn.to/42jEfjN',
+                    image: 'https://via.placeholder.com/600x100?text=Echo+Go+Hydrogen+Water+Bottle',
+                    alt: 'Echo Go+ Hydrogen Water Bottle'
+                }
+            ];
+
+            // Preload images
+            ads.forEach(ad => {
+                const img = new Image();
+                img.src = ad.image;
+            });
+
+            let currentAdIndex = 0;
+
+            function rotateAd() {
+                const adLink = document.getElementById('adLink');
+                const adImage = document.getElementById('adImage');
+                if (adLink && adImage) {
+                    // Add fading class to trigger opacity transition
+                    adImage.classList.add('fading');
+                    setTimeout(() => {
+                        const currentAd = ads[currentAdIndex];
+                        adLink.href = currentAd.link;
+                        adImage.src = currentAd.image;
+                        adImage.alt = currentAd.alt;
+                        adImage.classList.remove('fading');
+                        currentAdIndex = (currentAdIndex + 1) % ads.length;
+                        console.log('Rotated ad to:', currentAd.alt);
+                    }, 500); // Match CSS transition duration
+                } else {
+                    console.error('Ad elements not found');
+                }
+            }
+
+            // Initial ad display
+            rotateAd();
+
+            // Rotate every 8 seconds
+            setInterval(rotateAd, 8000);
         });
-
-        // Rotating Affiliate Banner
-        const ads = [
-            {
-                link: 'https://amzn.to/4i6jcXK',
-                image: 'https://via.placeholder.com/600x100?text=Weighted+Heated+Lap+Pad',
-                alt: 'Weighted Heated Lap Pad'
-            },
-            {
-                link: 'https://amzn.to/4jo3R5Y',
-                image: 'https://via.placeholder.com/600x100?text=Bearaby+Cotton+Hand-Knit+Weighted+Blanket',
-                alt: 'Bearaby Cotton Hand-Knit Weighted Blanket'
-            },
-            {
-                link: 'https://amzn.to/4ir7OWZ',
-                image: 'https://via.placeholder.com/600x100?text=Serenilite+Stress+Balls',
-                alt: 'Serenilite Stress Balls'
-            },
-            {
-                link: 'https://amzn.to/4jbEB3h',
-                image: 'https://via.placeholder.com/600x100?text=AG1+Supplement',
-                alt: 'AG1 Supplement'
-            },
-            {
-                link: 'https://amzn.to/42jEfjN',
-                image: 'https://via.placeholder.com/600x100?text=Echo+Go+Hydrogen+Water+Bottle',
-                alt: 'Echo Go+ Hydrogen Water Bottle'
-            }
-        ];
-
-        let currentAdIndex = 0;
-
-        function rotateAd() {
-            const adLink = document.getElementById('adLink');
-            const adImage = document.getElementById('adImage');
-            if (adLink && adImage) {
-                const currentAd = ads[currentAdIndex];
-                adLink.href = currentAd.link;
-                adImage.src = currentAd.image;
-                adImage.alt = currentAd.alt;
-                currentAdIndex = (currentAdIndex + 1) % ads.length;
-                console.log('Rotated ad to:', currentAd.alt);
-            } else {
-                console.error('Ad elements not found');
-            }
-        }
-
-        // Initial ad display
-        rotateAd();
-
-        // Rotate every 8 seconds
-        setInterval(rotateAd, 8000);
     </script>
 </body>
 </html>
