@@ -229,6 +229,7 @@
                     <a href="activities.html#gratitude">Gratitude</a>
                 </div>
             </div>
+            <a href="music.html">Mood Music</a>
             <a href="blog.html">Blog</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Use</a>
@@ -238,7 +239,7 @@
         <h1>Transform Your Mood</h1>
         <p>Enter your current mood below, and we’ll suggest science-backed activities to help you feel better.</p>
         <div class="mood-input">
-            <select id="moodSelect">
+            <select id="moodSelect" onchange="submitMood()">
                 <option value="">How are you feeling?</option>
                 <option value="Tired">Tired</option>
                 <option value="Stressed">Stressed</option>
@@ -434,10 +435,14 @@
         };
 
         function submitMood() {
-            const mood = document.getElementById('moodSelect').value;
-            if (!mood) return;
-            saveMood(mood);
-            showRecommendations(mood);
+            const moodSelect = document.getElementById('moodSelect');
+            const mood = moodSelect.value;
+            if (mood) {
+                saveMood(mood);
+                showRecommendations(mood);
+            } else {
+                alert("Please select a mood.");
+            }
         }
 
         function saveMood(mood) {
@@ -450,6 +455,8 @@
         function showRecommendations(mood) {
             const recTitle = document.getElementById('recTitle');
             const recList = document.getElementById('recList');
+            const recommendationsDiv = document.getElementById('recommendations');
+
             recTitle.textContent = `Recommendations for ${mood} Mood:`;
             recList.innerHTML = `<p style="font-style: italic;">You entered ${mood.toLowerCase()}</p>`;
             moodTasks[mood].forEach(task => {
@@ -465,7 +472,7 @@
                 `;
                 recList.appendChild(div);
             });
-            document.getElementById('recommendations').style.display = 'block';
+            recommendationsDiv.style.display = 'block';
         }
 
         function openPopup(popupId) {
@@ -503,10 +510,7 @@
 
         function startSoundscape() {
             let time = 60;
-            const timerDisplay = public static void main(String[] args) {
-    // Code here
-}
-document.getElementById('soundscapeTimer');
+            const timerDisplay = document.getElementById('soundscapeTimer');
             const affirmation = document.getElementById('soundscapeAffirmation');
             const interval = setInterval(() => {
                 time--;
