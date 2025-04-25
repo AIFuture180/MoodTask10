@@ -133,6 +133,7 @@
             max-width: 600px;
             margin: 20px auto;
             text-align: left;
+            clear: both;
         }
         .recommendation.active {
             display: block;
@@ -160,13 +161,14 @@
             font-size: 0.9em;
         }
         .ad-player {
-            max-width: 600px;
-            margin: 20px auto;
-            text-align: center;
+            max-width: 450px;
+            margin: 20px 20px 20px 0;
+            text-align: left;
             position: relative;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             transition: transform 0.3s;
+            float: left;
         }
         .ad-player:hover {
             transform: scale(1.02);
@@ -179,14 +181,21 @@
         }
         .ad-player-text {
             margin: 10px 0;
-            font-size: 1em;
-            color: #4A90E2;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #00A651;
             text-align: center;
             text-decoration: none;
-            transition: color 0.3s;
+            background-color: rgba(0, 166, 81, 0.1);
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: color 0.3s, background-color 0.3s;
+            clear: both;
         }
         .ad-player-text:hover {
-            color: #2C3E50;
+            color: #00843D;
+            background-color: rgba(0, 166, 81, 0.2);
             text-decoration: underline;
         }
         .footer {
@@ -197,6 +206,7 @@
             justify-content: space-around;
             flex-wrap: wrap;
             text-align: left;
+            clear: both;
         }
         .footer h3 {
             margin-bottom: 15px;
@@ -268,12 +278,18 @@
                 padding: 8px 15px;
                 font-size: 0.8em;
             }
+            .ad-player {
+                max-width: 450px;
+                margin: 20px auto;
+                float: none;
+                text-align: center;
+            }
             .ad-player video {
                 width: 100%;
             }
             .ad-player-text {
-                font-size: 0.9em;
-                padding: 0 10px;
+                font-size: 0.95em;
+                padding: 6px 10px;
             }
         }
     </style>
@@ -503,7 +519,7 @@
     </div>
     <div class="ad-player" id="adPlayer">
         <a href="https://amzn.to/4jbEB3h" target="_blank">
-            <video controls poster="https://via.placeholder.com/600x100?text=AG1+Video+Thumbnail">
+            <video autoplay muted loop controls poster="https://via.placeholder.com/450x75?text=AG1+Video+Thumbnail">
                 <source src="./AG1 Clip.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -588,12 +604,19 @@
             // Ad player initialization
             const adPlayer = document.getElementById('adPlayer');
             if (adPlayer) {
-                console.log('Ad player initialized');
+                console.log('Ad player initialized with autoplay and loop');
                 adPlayer.addEventListener('click', (e) => {
                     if (e.target.tagName === 'VIDEO') {
                         console.log('Ad player video clicked, redirecting to affiliate link');
                     }
                 });
+                // Ensure video plays on load
+                const video = adPlayer.querySelector('video');
+                if (video) {
+                    video.play().catch(error => {
+                        console.error('Autoplay failed:', error);
+                    });
+                }
             } else {
                 console.error('Ad player element not found');
             }
