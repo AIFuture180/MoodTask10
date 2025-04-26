@@ -35,11 +35,28 @@
             font-weight: 600;
             color: #4A90E2;
         }
+        .nav-bar .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
         .nav-bar a {
-            margin: 0 10px;
             text-decoration: none;
             color: #4A90E2;
             font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .nav-bar a:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+        .nav-bar a.active {
+            background-color: #4A90E2;
+            color: white;
+            font-weight: 600;
         }
         .nav-bar .dropdown {
             position: relative;
@@ -53,16 +70,19 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             z-index: 1;
             border-radius: 5px;
+            top: 100%;
+            left: 0;
         }
         .nav-bar .dropdown-content a {
             color: #4A90E2;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
-            margin: 0;
+            border-radius: 0;
         }
         .nav-bar .dropdown-content a:hover {
             background-color: #f0f0f0;
+            transform: none;
         }
         .nav-bar .dropdown:hover .dropdown-content {
             display: block;
@@ -216,14 +236,27 @@
         @media (max-width: 600px) {
             .nav-bar {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
                 padding: 15px 20px;
             }
-            .nav-bar div {
-                display: flex;
+            .nav-bar .nav-links {
                 flex-direction: column;
                 gap: 10px;
+                width: 100%;
                 align-items: center;
+            }
+            .nav-bar a {
+                padding: 10px 20px;
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            .nav-bar .dropdown {
+                width: 100%;
+            }
+            .nav-bar .dropdown-content {
+                width: 100%;
+                left: 0;
             }
             .hero {
                 padding: 60px 15px;
@@ -243,7 +276,7 @@
 <body>
     <div class="nav-bar">
         <div class="logo">MoodTask</div>
-        <div>
+        <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="calendar.html">Dashboard</a>
             <div class="dropdown">
@@ -260,7 +293,7 @@
                     <a href="activities.html#gratitude">Gratitude</a>
                 </div>
             </div>
-            <a href="music.html">Mood Music</a>
+            <a href="music.html" class="active">Mood Music</a>
             <a href="blog.html">Blog</a>
             <a href="privacy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Use</a>
